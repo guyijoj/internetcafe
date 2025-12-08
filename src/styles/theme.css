@@ -1,0 +1,24 @@
+:root {
+  /* --brand-50: #eef2ff;
+  --brand-500: #6366f1;
+  --brand-600: #5457e0;
+  --gray-900: #0b0f17;
+  --gray-100: #f3f4f6;
+
+  --bg: #ffffff;
+  --fg: #111827;
+  --primary: var(--brand-600);
+  --muted: #6b7280;
+  --border: #e5e7eb; */
+  --main-background: #e5e5e5;
+  --sub-background: #ffffff;
+
+  --main-color: #b50000;
+
+  --logo-color-font: #ffe7a8;
+  --main-font-color: #000000;
+  --sub-font-color: #9e9e9e;
+
+  --red: #b50000;
+  --yellow: #ffe7a8;
+}

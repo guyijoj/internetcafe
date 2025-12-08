@@ -1,0 +1,133 @@
+:root {
+  /* значения по умолчанию перекрываются инлайном из компонента */
+  --menu-per-view: 6;
+  --viewport-peek-menu: 15px;
+  --slide-gap-menu: 24px;
+
+  /* вычисляемая ширина карточки */
+  --menu-size: calc(
+    (100% - (var(--slide-gap-menu) * (var(--menu-per-view) - 1))) /
+      var(--menu-per-view)
+  );
+
+  --sticky-top: ;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 1rem 1.2rem;
+  background-color: var(--main-color);
+}
+
+.sticky {
+  position: sticky;
+  top: 7.2rem;
+  z-index: 900;
+}
+
+.arrow {
+  inline-size: 40px;
+  block-size: 40px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: var(--surface-1, #f4f4f5);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: opacity 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.arrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.arrow:not(:disabled):hover {
+  background: var(--surface-2, #e9e9ec);
+  border-color: var(--surface-3, #d9d9df);
+}
+
+.viewport {
+  overflow: hidden;
+  padding-inline: var(--viewport-peek-menu);
+}
+
+.container {
+  display: flex;
+  gap: var(--slide-gap-menu);
+}
+
+.slide {
+  flex: 0 0 var(--menu-size);
+  min-width: 0;
+}
+
+.card {
+  width: 100%;
+  height: 3.5rem; /* высота «меню»-плитки */
+  border-radius: 12px;
+  background: #910000;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+.card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  background: #c43333;
+  font-size: 2rem;
+}
+
+.card:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.cardInner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 10px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.label {
+  color: var(--logo-color-font);
+  font-size: 1.4rem;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card:hover .label {
+  color: var(--logo-color-font, #111);
+}
+/* адаптив: 3 на планшете, 2/1 на мобилках */
+@media (max-width: 1024px) {
+  :root {
+    --menu-per-view: 3;
+  }
+}
+@media (max-width: 768px) {
+  :root {
+    --menu-per-view: 2;
+  }
+}
+@media (max-width: 480px) {
+  :root {
+    --menu-per-view: 1;
+  }
+}

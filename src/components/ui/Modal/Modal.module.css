@@ -1,0 +1,88 @@
+:root {
+  --modal-width: 100rem;
+  --modal-height: 70%;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.modal {
+  min-width: var(--modal-width);
+
+  margin: 3rem;
+  overflow: auto;
+  background: var(--main-background);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  animation: pop 0.16s ease-out;
+}
+
+@keyframes pop {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0;
+  padding-bottom: 0.1rem;
+  border-bottom: 2px solid var(--main-color);
+}
+
+.close {
+  border: none;
+  background: transparent;
+  font-size: 2.4rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.6rem;
+  border-radius: 8px;
+}
+
+.close:hover {
+  background: #f2f2f2;
+}
+
+.body {
+  padding-top: 2rem;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --modal-width: 90%;
+  }
+}
+@media (max-width: 768px) {
+  :root {
+    --modal-height: 80%;
+  }
+}
+@media (max-width: 480px) {
+  :root {
+    --modal-height: 70%;
+    --modal-height: 90%;
+  }
+}

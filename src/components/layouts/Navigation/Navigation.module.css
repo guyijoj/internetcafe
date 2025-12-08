@@ -1,0 +1,51 @@
+.nav {
+  font-size: 2.4rem;
+
+  width: 100%;
+  background-color: var(--main-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo_image {
+  width: 15.5rem;
+  margin-left: 2rem;
+}
+
+.nav_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3.4rem;
+  margin-right: 2rem;
+}
+.work,
+.restaurant {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #ffe7a8;
+
+  cursor: pointer;
+  border: none;
+  border-bottom: 2px var(--main-color) solid;
+  background: none;
+  transition: opacity 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.restaurant:hover,
+.work:hover {
+  border-bottom-color: #ffe7a8;
+}
+.phone_number {
+  color: var(--logo-color-font);
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-decoration: none;
+}

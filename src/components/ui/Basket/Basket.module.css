@@ -1,0 +1,110 @@
+:root {
+  --menu-gallery-part: 75%;
+  --basket-part: 25%;
+}
+.basketSection {
+  flex: 0 0 var(--basket-part);
+  margin-top: 5%;
+}
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 45rem;
+
+  margin-top: 6rem;
+}
+
+.sticky {
+  position: sticky;
+  top: 20%;
+
+  background-color: var(--sub-background);
+}
+
+.basket {
+  display: flex;
+  gap: 2rem;
+  padding: 1.2rem;
+  max-height: 70vh;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.mainHeading {
+  font-size: 3.2rem;
+  color: var(--main-font-color);
+}
+.subHeading {
+  font-size: 1.6rem;
+  color: var(--sub-font-color);
+}
+.headerBasket {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.trash {
+  display: flex;
+
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 16px;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+.trash:hover {
+  background-color: var(--main-background);
+}
+.order {
+  overflow: auto;
+  flex: 1 1 auto;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  overscroll-behavior: contain;
+}
+.headerBasket::after,
+.total::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  margin-top: 20px;
+}
+
+.total {
+  width: 100%;
+  display: flex;
+  padding: 0.3rem;
+  flex-wrap: wrap;
+
+  align-items: center;
+  justify-content: space-between;
+}
+.amount {
+  font-size: 1.5rem;
+}
+
+.cutlery {
+  width: 100%;
+}
+
+.button {
+  background-color: coral;
+  border-radius: 16px;
+  min-width: 25rem;
+  text-align: center;
+  padding: 1.2rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .basket {
+    max-height: 85vh;
+  }
+}

@@ -1,0 +1,74 @@
+.body {
+  margin-bottom: 2rem;
+}
+.tab {
+  display: flex;
+  gap: 1.8rem;
+  margin-bottom: 1.2rem;
+}
+.metro {
+  border: none;
+  background: none;
+  font-size: 1.8rem;
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  border-radius: 16px;
+  transition: transform 0.5s ease-in, box-shadow 0.2s ease;
+
+  cursor: pointer;
+}
+.metroTrue {
+  font-size: 1.9rem;
+
+  background-color: var(--sub-background);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.card {
+  background-color: var(--sub-background);
+  max-width: 100rem;
+  height: 30rem;
+  display: flex;
+  overflow: hidden;
+  border-radius: 16px;
+  transition: transform 0.3s ease-in, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.photoCon {
+  width: 55%;
+
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.infoPart {
+  padding: 2.4rem 1.2rem;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.info {
+  margin-bottom: 1.2rem;
+  font-size: 1.6rem;
+  color: initial;
+  text-decoration: none;
+}
+.link {
+  text-align: end;
+  cursor: pointer;
+  color: initial;
+  transition: all 0.2s ease-in;
+  text-decoration: underline;
+  text-decoration-color: var(--sub-background);
+}
+.link:hover,
+.link:active {
+  font-weight: 500;
+  text-decoration-color: initial;
+}

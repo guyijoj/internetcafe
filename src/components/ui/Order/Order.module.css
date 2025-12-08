@@ -1,0 +1,41 @@
+.row {
+  display: grid;
+  width: 100%;
+
+  grid-template-columns: 64px 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: var(--sub-backcolor, #fff);
+}
+
+.thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 12px; /* скругление как на скрине */
+}
+
+.main {
+  min-width: 0;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--main-font-color, #111);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.price {
+  font-weight: 600;
+  margin-right: 12px;
+  color: var(--main-font-color, #111);
+}
+
+.qty {
+  justify-self: end;
+}
