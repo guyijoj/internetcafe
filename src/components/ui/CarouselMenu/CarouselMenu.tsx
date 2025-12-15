@@ -5,10 +5,9 @@ import styles from "./CarouselMenu.module.css";
 import useEmblaCarousel from "embla-carousel-react";
 import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
 import { scrollToWithOffset } from "../../../../utils/scrollToWithOffset";
-import { MenuItem } from "../../../data/menu";
+import { useMenu } from "../../../context/MenuContext";
 
 type CarouselMenuProps = {
-  items: MenuItem[];
   onClick?: () => void;
   slidesPerView?: number;
   peek?: number;
@@ -17,11 +16,10 @@ type CarouselMenuProps = {
   dragFree?: boolean;
   showArrows?: boolean;
   onSelectIndexChange?: (index: number, embla: EmblaCarouselType) => void;
-  options?: EmblaOptionsType; // если захочешь пробрасывать любые опции
+  options?: EmblaOptionsType;
 };
 
 export default function CarouselMenu({
-  items,
   slidesPerView = 4,
   peek = 12,
   gap = 12,
@@ -42,6 +40,7 @@ export default function CarouselMenu({
     ...options,
   });
 
+  const { categories } = useMenu();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
 
@@ -90,13 +89,10 @@ export default function CarouselMenu({
 
       <div className={styles.viewport} ref={viewportRef}>
         <div className={styles.container}>
-          {items.map((item) => {
+          {categories.map((item) => {
             const content = (
               <div className={styles.cardInner}>
-                {item.iconSrc && (
-                  <img className={styles.icon} src={item.iconSrc} alt="" />
-                )}
-                <span className={styles.label}>{item.label}</span>
+                <span className={styles.label}>{item.name}</span>
               </div>
             );
 

@@ -6,10 +6,10 @@ type MenuCardProps = {
   imageSrc: string;
   imageAlt?: string;
   title: string;
-  description: string;
+  description: string | null;
   weightGrams?: number;
   priceRub: number;
-  onClick?: () => void; // действие на кнопку цены
+  onClick?: () => void;
   disabled?: boolean;
 };
 

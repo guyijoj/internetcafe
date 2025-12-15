@@ -1,4 +1,3 @@
-import React from "react";
 import { Carousel } from "../CarouselPromo/Carousel";
 
 const PromoSection = () => {

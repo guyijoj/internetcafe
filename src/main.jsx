@@ -6,14 +6,17 @@ import "./styles/theme.css";
 import { ModalRoot } from "./components/ui/Modal/ModalRoot.tsx";
 import { ModalProvider } from "./components/ui/Modal/ModalProvider.js";
 import { CartProvider } from "./context/CartContext.tsx";
+import { MenuProvider } from "./context/MenuContext.tsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <CartProvider>
-      <ModalProvider>
-        <App />
-        <ModalRoot />
-      </ModalProvider>
-    </CartProvider>
+    <MenuProvider>
+      <CartProvider>
+        <ModalProvider>
+          <App />
+          <ModalRoot />
+        </ModalProvider>
+      </CartProvider>
+    </MenuProvider>
   </StrictMode>
 );

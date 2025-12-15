@@ -1,23 +1,23 @@
-import { Children } from "react";
 import MenuCard from "../MenuCard/MenuCard";
 import styles from "./CategoryMeal.module.css";
-import { Item } from "../../../data/menu";
+
 import { useCart } from "../../../context/CartContext";
+import { menuItem } from "../../../types/cart";
 
 type CategoryMealProps = {
   children: string;
-  items: Item[];
   id: string;
+  items: menuItem[];
 };
-export const CategoryMeal = ({ children, items, id }: CategoryMealProps) => {
+export const CategoryMeal = ({ children, id, items }: CategoryMealProps) => {
   const { addItem } = useCart();
 
-  const handleAdd = (item: Item) => {
+  const handleAdd = (item: menuItem) => {
     addItem({
       id: item.id,
       name: item.name,
       price: item.price,
-      image: item.image,
+      image: item.image_url,
       quantity: 1,
     });
   };
@@ -29,8 +29,8 @@ export const CategoryMeal = ({ children, items, id }: CategoryMealProps) => {
         {items.map((item, index) => (
           <MenuCard
             key={index}
-            imageSrc={item.image}
-            imageAlt={`Блюдо ${item.id}`}
+            imageSrc={item.image_url}
+            imageAlt={`Блюдо ${item.name}`}
             title={item.name}
             description={item.description}
             weightGrams={item.weight}
