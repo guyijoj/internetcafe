@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { GrBasket } from "react-icons/gr";
 import { FaRegTrashCan } from "react-icons/fa6";
-
 import styles from "./Basket.module.css";
 import { useCart } from "../../../context/CartContext";
 import Counter from "../Counter/Counter";

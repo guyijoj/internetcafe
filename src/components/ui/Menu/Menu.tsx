@@ -1,15 +1,18 @@
-import React from "react";
 import styles from "./Menu.module.css";
 
 import { CategoryMeal } from "../CategoryMeal/CategoryMeal";
-import { menu } from "../../../data/menu";
+
+import { categoryWithMenu } from "../../../types/cart";
+import { useMenu } from "../../../context/MenuContext";
 
 export const Menu = () => {
+  const { categories, loading, error } = useMenu();
+
   return (
     <div className={styles.menu}>
-      {menu.map((section) => (
-        <CategoryMeal id={section.id} items={section.items}>
-          {section.label}
+      {categories.map((category: categoryWithMenu) => (
+        <CategoryMeal id={category.id.toString()} items={category.menu_items}>
+          {category.name}
         </CategoryMeal>
       ))}
     </div>

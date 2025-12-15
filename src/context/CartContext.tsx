@@ -12,11 +12,11 @@ import { CartItem } from "../types/cart";
 type CartContextType = {
   items: CartItem[];
   addItem: (item: CartItem) => void;
-  removeItem: (id: string) => void;
+  removeItem: (id: number) => void;
   clearCart: () => void;
   total: number;
-  increment: (id: string, step?: number) => void;
-  decrement: (id: string, step?: number) => void;
+  increment: (id: number, step?: number) => void;
+  decrement: (id: number, step?: number) => void;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -40,12 +40,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const increment = (id: string, step = 1) =>
+  const increment = (id: number, step = 1) =>
     setItems((prev) =>
-      prev.map((i) => (i.id === id ? { ...i, quantity: i.quantity + step } : i))
+      prev.map((i) => (i.id == id ? { ...i, quantity: i.quantity + step } : i))
     );
 
-  const decrement = (id: string, step = 1) =>
+  const decrement = (id: number, step = 1) =>
     setItems(
       (prev) =>
         prev
@@ -53,7 +53,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           .filter((i) => i.quantity > 0) // если стало 0 — удаляем
     );
 
-  const removeItem = (id: string) => {
+  const removeItem = (id: number) => {
     setItems((prev) => prev.filter((i) => i.id !== id));
   };
 

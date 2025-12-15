@@ -1,6 +1,10 @@
+:root {
+  --menuCard-per-view: 5;
+}
+
 .meals {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(var(--menuCard-per-view), 1fr);
   gap: 1.2rem;
 }
 .title {
@@ -8,4 +12,15 @@
   font-weight: 700;
   margin-top: 3rem;
   margin-bottom: 1.8rem;
+}
+
+/* адаптив */
+@media (max-width: 1024px) {
+  :root {
+    --menuCard-per-view: 4;
+  }
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 480px) {
 }
