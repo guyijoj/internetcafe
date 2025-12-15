@@ -30,8 +30,9 @@ export const Navigation = () => {
           <a href={`tel:${restaurantNumber}`} className={styles.phone_number}>
             {restaurantNumber}
           </a>
-          <RxHamburgerMenu size={35} />
         </div>
+
+        <RxHamburgerMenu className={styles.burger} size={35} />
       </div>
     </>
   );

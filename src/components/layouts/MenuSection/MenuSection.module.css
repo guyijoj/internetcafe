@@ -1,3 +1,7 @@
+:root {
+  --menu-gallery-part: 75%;
+  --basket-part: 25%;
+}
 .container {
   display: flex;
   margin: 0 auto;
@@ -5,4 +9,27 @@
 }
 .sectionMenu {
   margin-bottom: 3rem;
+}
+/* адаптив */
+@media (max-width: 1400px) {
+  :root {
+  }
+}
+@media (max-width: 1024px) {
+  :root {
+    --menu-gallery-part: 68%;
+    --basket-part: 32%;
+  }
+}
+@media (max-width: 914px) {
+  :root {
+    --menu-gallery-part: 65%;
+    --basket-part: 35%;
+  }
+}
+@media (max-width: 780px) {
+  :root {
+    --menu-gallery-part: 100%;
+    --basket-part: 0%;
+  }
 }
