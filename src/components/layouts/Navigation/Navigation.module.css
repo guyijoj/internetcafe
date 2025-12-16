@@ -1,6 +1,5 @@
 .nav {
   font-size: 2.4rem;
-
   width: 100%;
   background-color: var(--main-color);
   display: flex;
@@ -26,6 +25,12 @@
   gap: 3.4rem;
   margin-right: 2rem;
 }
+
+.burger {
+  display: none;
+  margin-right: 2rem;
+  color: var(--logo-color-font);
+}
 .work,
 .restaurant {
   font-size: 1.8rem;
@@ -48,4 +53,13 @@
   font-size: 1.5rem;
   font-weight: 500;
   text-decoration: none;
+}
+
+@media (max-width: 780px) {
+  .burger {
+    display: block;
+  }
+  .nav_info {
+    display: none;
+  }
 }

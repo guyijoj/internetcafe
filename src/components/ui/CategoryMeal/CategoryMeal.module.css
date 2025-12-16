@@ -15,12 +15,22 @@
 }
 
 /* адаптив */
-@media (max-width: 1024px) {
+@media (max-width: 1400px) {
   :root {
     --menuCard-per-view: 4;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
+  :root {
+    --menuCard-per-view: 3;
+  }
+}
+@media (max-width: 914px) {
+  :root {
+    --menuCard-per-view: 2;
+  }
 }
 @media (max-width: 480px) {
+  :root {
+  }
 }

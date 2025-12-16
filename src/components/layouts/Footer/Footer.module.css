@@ -105,3 +105,18 @@
     place-items: start;
   }
 }
+@media (max-width: 450px) {
+  .footer {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    text-align: center;
+  }
+
+  .right {
+    align-items: center;
+  }
+
+  .center {
+    place-items: center;
+  }
+}
