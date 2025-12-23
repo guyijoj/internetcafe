@@ -7,7 +7,7 @@ export const Navigation = () => {
   return (
     <>
       <div className={`${styles.nav} ${styles.sticky}`}>
-        <img src="public/logo2.png" className={styles.logo_image} />
+        <img src="logo2.png" className={styles.logo_image} />
         <div className={styles.nav_info}>
           <button
             type="button"
