@@ -41,7 +41,7 @@ export default function Footer() {
       <div className={styles.center}>
         <img
           className={styles.logo}
-          src="public/logo2.png"
+          src="/logo2.png"
           alt="ВьетКафе — рестораны вьетнамской кухни"
         />
       </div>
