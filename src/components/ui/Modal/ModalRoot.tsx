@@ -3,6 +3,7 @@
 import { useModal } from "./useModal";
 import { RestaurantsModal } from "./modals/RestaurantsModal";
 import { JobsModal } from "./modals/JobsModal";
+import { BasketMobileModal } from "./modals/MobileBasketModal";
 
 /**
  * Здесь “регистрируем” все модалки по id.
@@ -18,6 +19,8 @@ export function ModalRoot() {
       return <RestaurantsModal onClose={closeModal} />;
     case "jobs":
       return <JobsModal onClose={closeModal} payload={payload} />;
+    case "mobileBasket":
+      return <BasketMobileModal onClose={closeModal} payload={payload} />;
     default:
       return null; // неизвестная модалка
   }

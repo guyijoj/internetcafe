@@ -2,7 +2,7 @@
   display: grid;
   width: 100%;
 
-  grid-template-columns: 64px 1fr auto auto;
+  grid-template-columns: 64px 1fr auto;
   align-items: center;
   gap: 16px;
   padding: 12px 8px;
@@ -22,7 +22,7 @@
 }
 
 .title {
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 600;
   color: var(--main-font-color, #111);
   overflow: hidden;
@@ -32,10 +32,13 @@
 
 .price {
   font-weight: 600;
-  margin-right: 12px;
+  font-size: 1.8rem;
   color: var(--main-font-color, #111);
 }
-
 .qty {
-  justify-self: end;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }

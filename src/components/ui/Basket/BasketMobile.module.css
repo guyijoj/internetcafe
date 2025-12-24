@@ -1,0 +1,50 @@
+.basketSection {
+  background-color: var(--sub-background);
+  padding: 1rem;
+}
+
+.empty {
+  text-align: center;
+  padding: 2rem 0;
+}
+.mainHeading {
+  margin-bottom: 1.2rem;
+}
+.subHeading {
+  color: var(--sub-font-color);
+}
+
+.order {
+  overflow: auto;
+  border-top: 1px solid var(--sub-font-color);
+  border-bottom: 1px solid var(--sub-font-color);
+  max-height: 25rem;
+  overscroll-behavior: contain;
+  margin-bottom: 1rem;
+}
+.trash {
+  display: flex;
+  justify-content: end;
+  margin-right: 0.4rem;
+  margin-bottom: 0.8rem;
+  padding: 0.5rem;
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.cutlery {
+  margin-bottom: 1rem;
+}
+
+.submit {
+  text-align: center;
+}
+.button {
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  background-color: brown;
+}

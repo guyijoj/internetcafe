@@ -1,0 +1,27 @@
+.quantity {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.inc,
+.dec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.4rem;
+  width: 2.4rem;
+  font-size: 2rem;
+  border-radius: 6px;
+  transition: all 0.4s;
+}
+.inc button,
+.dec button {
+  width: 100%;
+  height: 100%;
+}
+
+.dec:active,
+.inc:active {
+  background-color: var(--sub-font-color);
+}

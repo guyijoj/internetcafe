@@ -15,7 +15,7 @@
 }
 
 /* адаптив */
-@media (max-width: 1400px) {
+@media (max-width: 1600px) {
   :root {
     --menuCard-per-view: 4;
   }

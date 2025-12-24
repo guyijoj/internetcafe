@@ -10,6 +10,16 @@
 .sectionMenu {
   margin-bottom: 3rem;
 }
+.basketMobile {
+  display: none;
+  position: fixed;
+  bottom: 1%;
+  right: 1%;
+
+  cursor: pointer;
+  padding-bottom: env(safe-area-inset-bottom);
+  pointer-events: none;
+}
 /* адаптив */
 @media (max-width: 1400px) {
   :root {
@@ -31,5 +41,8 @@
   :root {
     --menu-gallery-part: 100%;
     --basket-part: 0%;
+  }
+  .basketMobile {
+    display: block;
   }
 }

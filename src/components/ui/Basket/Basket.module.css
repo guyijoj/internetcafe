@@ -8,14 +8,12 @@
   justify-content: center;
   align-items: center;
   height: 45rem;
-
   margin-top: 6rem;
 }
 
 .sticky {
   position: sticky;
   top: 20%;
-
   background-color: var(--sub-background);
 }
 
@@ -27,6 +25,15 @@
   flex-direction: column;
   align-items: center;
   transition: opacity 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.basketMobile {
+  background-color: bisque;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.basketMobile > * {
+  pointer-events: auto; /* а по самой корзине клики работали */
 }
 
 .mainHeading {
@@ -46,7 +53,6 @@
 }
 .trash {
   display: flex;
-
   cursor: pointer;
   padding: 1rem;
   border-radius: 16px;
