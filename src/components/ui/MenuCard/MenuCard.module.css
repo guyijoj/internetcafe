@@ -70,8 +70,29 @@
   margin-top: 4px;
 }
 
+.counter {
+  transition: all 0.3s ease;
+  padding: 14px 18px 30px 18px;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.counter.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .footer {
+  transition: all 0.3s ease;
   padding: 14px 18px 18px 18px;
+
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.footer.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .priceBtn {
@@ -80,6 +101,7 @@
   border: 0;
   border-radius: 16px;
   background: var(--chip-bg);
+
   color: var(--chip-color);
   font-weight: 700;
   font-size: 1.2rem;
@@ -94,6 +116,7 @@
 
 .priceBtn:active {
   transform: translateY(1px);
+  background-color: var(--main-color-light);
 }
 
 .priceBtn:disabled {

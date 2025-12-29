@@ -32,6 +32,7 @@
   inline-size: 40px;
   block-size: 40px;
   border-radius: 9999px;
+  color: black;
   border: 1px solid transparent;
   background: var(--surface-1, #f4f4f5);
   cursor: pointer;

@@ -10,7 +10,7 @@ interface QuantityProps {
   max: number;
 }
 
-const Quantity = ({ value, onDec, onInc, min, max }: QuantityProps) => {
+const Quantity = ({ value, onDec, onInc, max }: QuantityProps) => {
   return (
     <div className={styles.quantity}>
       <div className={styles.dec}>

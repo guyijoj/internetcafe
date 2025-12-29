@@ -11,7 +11,10 @@ export const Menu = () => {
   return (
     <div className={styles.menu}>
       {categories.map((category: categoryWithMenu) => (
-        <CategoryMeal id={category.id.toString()} items={category.menu_items}>
+        <CategoryMeal
+          id={category.id.toString()}
+          cardItems={category.menu_items}
+        >
           {category.name}
         </CategoryMeal>
       ))}

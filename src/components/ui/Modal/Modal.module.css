@@ -55,7 +55,8 @@
 .close {
   border: none;
   background: transparent;
-  font-size: 2.4rem;
+  font-size: 3.2rem;
+  color: black;
   line-height: 1;
   cursor: pointer;
   padding: 0.6rem;

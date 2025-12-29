@@ -20,6 +20,7 @@
 .basket {
   display: flex;
   gap: 2rem;
+  color: var(--logo-color-font);
   padding: 1.2rem;
   max-height: 70vh;
   flex-direction: column;
@@ -28,12 +29,17 @@
 }
 
 .basketMobile {
-  background-color: bisque;
+  background-color: var(--main-color);
   border-radius: 50px;
   cursor: pointer;
 }
+
 .basketMobile > * {
   pointer-events: auto; /* а по самой корзине клики работали */
+}
+
+.basketMobile:active {
+  background-color: var(--main-color-light);
 }
 
 .mainHeading {
@@ -49,6 +55,7 @@
   width: 100%;
   flex-wrap: wrap;
   align-items: center;
+  color: var(--main-font-color);
   justify-content: space-between;
 }
 .trash {
@@ -85,7 +92,7 @@
   display: flex;
   padding: 0.3rem;
   flex-wrap: wrap;
-
+  color: var(--main-font-color);
   align-items: center;
   justify-content: space-between;
 }
@@ -105,7 +112,7 @@
   padding: 1.2rem 2rem;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 900px) {
   .basketSection {
     display: none;
   }

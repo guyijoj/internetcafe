@@ -2,15 +2,20 @@ import MenuCard from "../MenuCard/MenuCard";
 import styles from "./CategoryMeal.module.css";
 
 import { useCart } from "../../../context/CartContext";
-import { menuItem } from "../../../types/cart";
+import { menuItem, CartItem } from "../../../types/cart";
+import Quantity from "../Quantity/Quantity";
 
 type CategoryMealProps = {
   children: string;
   id: string;
-  items: menuItem[];
+  cardItems: menuItem[];
 };
-export const CategoryMeal = ({ children, id, items }: CategoryMealProps) => {
-  const { addItem } = useCart();
+export const CategoryMeal = ({
+  children,
+  id,
+  cardItems,
+}: CategoryMealProps) => {
+  const { items, addItem } = useCart();
 
   const handleAdd = (item: menuItem) => {
     addItem({
@@ -26,7 +31,7 @@ export const CategoryMeal = ({ children, id, items }: CategoryMealProps) => {
       <h2 className={styles.title}>{children}</h2>
 
       <div className={styles.meals}>
-        {items.map((item, index) => (
+        {cardItems.map((item, index) => (
           <MenuCard
             key={index}
             imageSrc={item.image_url}
@@ -35,6 +40,9 @@ export const CategoryMeal = ({ children, id, items }: CategoryMealProps) => {
             description={item.description}
             weightGrams={item.weight}
             priceRub={item.price}
+            counter={
+              items.find((cartItem) => cartItem.id === item.id) || undefined
+            }
             onClick={() => handleAdd(item)}
           />
         ))}

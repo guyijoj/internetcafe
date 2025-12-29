@@ -37,7 +37,7 @@
 }
 
 .cutlery {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .submit {
@@ -46,5 +46,10 @@
 .button {
   padding: 1rem 2rem;
   border-radius: 16px;
-  background-color: brown;
+  color: var(--main-background);
+  background-color: var(--main-color);
+  transition: background 160ms ease, transform 100ms ease;
+}
+.button:active {
+  background-color: var(--main-color-light);
 }
