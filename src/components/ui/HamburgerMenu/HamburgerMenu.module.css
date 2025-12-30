@@ -1,0 +1,64 @@
+.nav {
+  position: relative;
+}
+.burger {
+  display: flex;
+  align-items: center;
+  color: var(--logo-color-font);
+  cursor: pointer;
+  transition: all 0.4s ease-in;
+}
+.burger:active {
+  background-color: var(--sub-font-color);
+}
+.mobileMenu {
+  position: absolute;
+  background-color: var(--main-color);
+  right: 0;
+  top: 4rem;
+  border-radius: 9px;
+  border: 1px solid var(--logo-color-font);
+  box-shadow: var(--card-shadow);
+  padding: 1rem 2rem;
+  transition: all 0.3s ease-in;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+}
+.mobileMenuActive {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.menu {
+  list-style-type: none;
+  min-width: 20rem;
+}
+.menuItem {
+  padding: 0.4rem 2rem;
+  font-size: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+.menuItem:last-child {
+  margin-bottom: 0;
+}
+.menuItem:hover {
+  background-color: var(--main-color-light);
+  text-decoration: underline;
+}
+
+/* .menuItem:not(:last-child) {
+  position: relative;
+}
+.menuItem:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  top: 110%;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: var(--logo-color-font);
+} */

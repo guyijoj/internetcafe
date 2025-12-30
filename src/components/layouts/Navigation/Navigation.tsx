@@ -1,6 +1,7 @@
 import styles from "./Navigation.module.css";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useModal } from "../../ui/Modal/useModal";
+import HamburgerMenu from "../../ui/HamburgerMenu/HamburgerMenu";
 export const Navigation = () => {
   const { openModal } = useModal();
   const restaurantNumber = "+7 (495) 215-11-99";
@@ -31,8 +32,9 @@ export const Navigation = () => {
             {restaurantNumber}
           </a>
         </div>
-
-        <RxHamburgerMenu className={styles.burger} size={35} />
+        <div className={styles.burger}>
+          <HamburgerMenu />
+        </div>
       </div>
     </>
   );

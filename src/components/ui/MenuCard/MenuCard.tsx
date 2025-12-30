@@ -58,26 +58,6 @@ const MenuCard = ({
         )}
       </div>
 
-      {/* <div className={styles.footer}>
-        <button
-          type="button"
-          className={styles.priceBtn}
-          onClick={onClick}
-          disabled={disabled}
-          aria-label={`Добавить "${title}" за ${priceText}`}
-        >
-          {priceText}
-        </button>
-      </div> */}
-      {/* <div className={styles.counter}>
-        <Quantity
-          value={counter ? counter.quantity : 0}
-          onDec={() => decrement(counter ? counter.id : 0)}
-          onInc={() => increment(counter ? counter.id : 0)}
-          min={1}
-          max={30}
-        />
-      </div> */}
       {isSelected && counterchecked > 0 ? (
         <div className={`${styles.counter} ${styles.show}`}>
           <Quantity
