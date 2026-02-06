@@ -1,104 +1,101 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Restaurants.module.css";
+import { getRestaurants } from "../../../api/restaurants";
+import {
+  restaurantsInfo,
+  RestaurantsModalPayload,
+} from "../../../types/restaurants";
+import { useModal } from "../Modal/useModal";
+import { useCart } from "../../../context/CartContext";
 
-interface Location {
-  image: string;
-  address: string;
-  hours: string[];
-  phone: string;
-  link: string;
-}
-interface Locations {
-  [key: number]: Location;
-}
+export const Restaurants = ({
+  onClose,
+  goBack,
+}: {
+  onClose: () => void;
+  goBack: boolean;
+}) => {
+  const { total } = useCart();
+  const { openModal } = useModal();
+  const [islocationTrue, setLocationTrue] = useState<string | null>(
+    localStorage.getItem("restaurant_id"),
+  );
+  const [isShowingTrue, setShowingTrue] = useState<string | null>(
+    localStorage.getItem("restaurant_id") || null,
+  );
+  const [restaurants, setRestaurants] = useState<restaurantsInfo[]>([]);
+  useEffect(() => {
+    getRestaurants().then((data) => {
+      setRestaurants(data);
+      if (!isShowingTrue && data.length > 0) setLocationTrue(data[0].id);
+    });
+  }, []);
 
-export const Restaurants = () => {
-  const [islocationTrue, setLocationTrue] = useState(1);
-  const locations: Locations = {
-    1: {
-      image: "/1_restaurant.webp",
-      address: "Газетный пер., 3",
-      hours: ["11:00 - 22:00"],
-      phone: "+7 (926) 469-68-04",
-      link: "https://yandex.ru/maps/org/vyetkafe/1001653542/?from=tabbar&ll=37.604854%2C55.757222&source=serp_navig&z=16.42",
-    },
-    2: {
-      image: "/2_restaurant.webp",
-      address: "Кировоградская, 13А (ТРЦ Columbus, 4-й этаж)",
-      hours: ["ВС-ЧТ 10:00 – 22:00", " ПТ-СБ 10:00 – 23:00"],
-      phone: "+7 (925) 456-34-54",
-      link: "https://yandex.ru/maps/org/vyetkafe/194155237034/?from=tabbar&ll=37.603920%2C55.612147&source=serp_navig&z=16.42",
-    },
-    3: {
-      image: "/3_restaurant.webp",
-      address: "ул. Намёткина, 13А",
-      hours: ["11:00 - 23:00"],
-      phone: "+7 (925) 079-78-63",
-      link: "https://yandex.ru/maps/org/vyetkafe/1085502016/?from=tabbar&ll=37.551368%2C55.662745&source=serp_navig&z=16.42",
-    },
+  const buttonEvent = (goBack: boolean) => {
+    if (!islocationTrue) return;
+    const restaurant = restaurants.find((r) => r.id === islocationTrue);
+    if (!restaurant) return;
+    localStorage.setItem("restaurant_id", islocationTrue);
+    localStorage.setItem("restaurant_city", restaurant.city);
+    if (goBack) {
+      openModal("checkout", { total: total });
+    } else {
+      onClose();
+    }
+    return;
   };
-  const chosenLocation = locations[islocationTrue];
+
   return (
     <div className={styles.body}>
       <div className={styles.tab}>
-        <button
-          onClick={() => setLocationTrue(1)}
-          className={`${styles.metro} ${
-            islocationTrue === 1 ? styles.metroTrue : ""
-          }`}
-        >
-          М: Охотный ряд
-        </button>
-        <button
-          onClick={() => setLocationTrue(2)}
-          className={`${styles.metro} ${
-            islocationTrue === 2 ? styles.metroTrue : ""
-          }`}
-        >
-          М: Пражская
-        </button>
-        <button
-          onClick={() => setLocationTrue(3)}
-          className={`${styles.metro} ${
-            islocationTrue === 3 ? styles.metroTrue : ""
-          }`}
-        >
-          М: Новые Черёмышки
-        </button>
+        {restaurants.map((restaurant, index) => (
+          <button
+            key={index}
+            onClick={() => setLocationTrue(restaurant.id)}
+            className={`${styles.metro} ${
+              islocationTrue === restaurant.id ? styles.metroTrue : ""
+            }`}
+          >
+            {restaurant.city}
+          </button>
+        ))}
       </div>
+      {restaurants.map((restaurant, index) => (
+        <div
+          key={index}
+          className={`${styles.card} ${islocationTrue === restaurant.id ? styles.cardTrue : ""}`}
+        >
+          <div className={styles.photoCon}>
+            <img
+              src={`${restaurant.photo}`}
+              alt="restaurant"
+              className={styles.photo}
+            />
+          </div>
+          <div className={styles.infoPart}>
+            <div>
+              <h3>Адрес:</h3>
+              <p className={styles.info}>{restaurant.address}</p>
 
-      <div className={styles.card}>
-        <div className={styles.photoCon}>
-          <img
-            src={`public/${chosenLocation.image}`}
-            alt="restaurant"
-            className={styles.photo}
-          />
-        </div>
-        <div className={styles.infoPart}>
-          <div>
-            <h3>Адрес:</h3>
-            <p className={styles.info}>{chosenLocation.address}</p>
+              <h3>График работы:</h3>
+              <p className={styles.info}>{restaurant.workingHours}</p>
 
-            <h3>График работы:</h3>
-            <p className={styles.info}>
-              {chosenLocation.hours.map((line, index) => (
-                <div key={index}>{line}</div>
-              ))}
-            </p>
+              <h3>Контакты</h3>
 
-            <h3>Контакты</h3>
+              <a href={`tel:${restaurant.phone}`} className={styles.info}>
+                {restaurant.phone}
+              </a>
+            </div>
 
-            <a href={`tel:${chosenLocation.phone}`} className={styles.info}>
-              {chosenLocation.phone}
+            <a href={restaurant.link} className={styles.link}>
+              Посмотреть на карте &rarr;
             </a>
           </div>
-
-          <a href={chosenLocation.link} className={styles.link}>
-            Посмотреть на карте &rarr;
-          </a>
         </div>
-      </div>
+      ))}
+      <button className={styles.btn} onClick={() => buttonEvent(goBack)}>
+        Выбрать
+      </button>
     </div>
   );
 };

@@ -1,12 +1,18 @@
 "use client";
 
+import { RestaurantsModalPayload } from "../../../../types/restaurants";
 import { Restaurants } from "../../Restaurants/Restaurants";
 import { ModalBase } from "../ModalBase";
 
-export function RestaurantsModal({ onClose }: { onClose: () => void }) {
+export type RestaurantsModalProps = {
+  onClose: () => void;
+  payload: RestaurantsModalPayload;
+};
+
+export function RestaurantsModal({ onClose, payload }: RestaurantsModalProps) {
   return (
     <ModalBase id="restaurants" title="Наши рестораны" onClose={onClose}>
-      <Restaurants />
+      <Restaurants onClose={onClose} goBack={payload.fromCheckout} />
     </ModalBase>
   );
 }

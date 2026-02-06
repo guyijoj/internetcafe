@@ -45,12 +45,6 @@
   align-items: start;
 }
 
-@media (max-width: 900px) {
-  .content {
-    grid-template-columns: 1fr;
-  }
-}
-
 .imageBox {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -63,7 +57,7 @@
 .image {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -141,4 +135,20 @@
   height: 6px;
   border-radius: 999px;
   background: var(--border);
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    max-height: 50rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .content {
+    grid-template-columns: 1fr;
+  }
+  .imageBox {
+    max-width: 55rem;
+    display: flex;
+    margin: 0 auto;
+  }
 }

@@ -1,7 +1,8 @@
-import React, { use, useState } from "react";
+import { useState } from "react";
 import styles from "./HamburgerMenu.module.css";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { menuItem } from "../../../types/cart";
+
+import { FaPhoneAlt } from "react-icons/fa";
 import { useModal } from "../Modal/useModal";
 
 const HamburgerMenu = () => {
@@ -9,6 +10,11 @@ const HamburgerMenu = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   return (
     <div className={styles.nav}>
+      <FaPhoneAlt
+        onClick={() => window.open("tel:+74952151199")}
+        className={styles.phone}
+        size={25}
+      />
       <RxHamburgerMenu
         className={styles.burger}
         onClick={() => setMenuOpen(!isMenuOpen)}

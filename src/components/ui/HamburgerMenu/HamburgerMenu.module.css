@@ -1,16 +1,20 @@
 .nav {
   position: relative;
-}
-.burger {
   display: flex;
   align-items: center;
+  gap: 1.8rem;
+}
+.burger,
+.phone {
   color: var(--logo-color-font);
   cursor: pointer;
-  transition: all 0.4s ease-in;
 }
-.burger:active {
-  background-color: var(--sub-font-color);
+
+.burger:active,
+.phone:active {
+  color: var(--sub-font-color);
 }
+
 .mobileMenu {
   position: absolute;
   background-color: var(--main-color);

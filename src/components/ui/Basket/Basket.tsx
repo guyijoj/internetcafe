@@ -5,11 +5,12 @@ import styles from "./Basket.module.css";
 import { useCart } from "../../../context/CartContext";
 import Counter from "../Counter/Counter";
 import Order from "../Order/Order";
+import { useModal } from "../Modal/useModal";
 
 export const Basket = () => {
   const { items, total, clearCart } = useCart();
   const [utensils, setUtensils] = useState(1);
-
+  const { openModal } = useModal();
   return (
     <div className={`${styles.basketSection} `}>
       <div className={` ${styles.sticky}`}>
@@ -46,7 +47,14 @@ export const Basket = () => {
                 />
               </div>
 
-              <button className={styles.button}>Оформить заказ</button>
+              <button
+                className={styles.button}
+                onClick={() => {
+                  openModal("checkout", { total: total });
+                }}
+              >
+                Оформить заказ
+              </button>
             </div>
           </>
         )}

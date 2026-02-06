@@ -1,10 +1,11 @@
 import styles from "./Navigation.module.css";
-import { RxHamburgerMenu } from "react-icons/rx";
+
 import { useModal } from "../../ui/Modal/useModal";
+import { FaPhoneAlt } from "react-icons/fa";
 import HamburgerMenu from "../../ui/HamburgerMenu/HamburgerMenu";
 export const Navigation = () => {
   const { openModal } = useModal();
-  const restaurantNumber = "+7 (495) 215-11-99";
+
   return (
     <>
       <div className={`${styles.nav} ${styles.sticky}`}>
@@ -13,7 +14,7 @@ export const Navigation = () => {
           <button
             type="button"
             className={styles.restaurant}
-            onClick={() => openModal("restaurants")}
+            onClick={() => openModal("restaurants", false)}
             aria-haspopup="dialog"
             aria-controls="restaurants-modal"
           >
@@ -28,8 +29,8 @@ export const Navigation = () => {
           >
             Работа у нас
           </button>
-          <a href={`tel:${restaurantNumber}`} className={styles.phone_number}>
-            {restaurantNumber}
+          <a href={`tel:+74952151199}`} className={styles.phone_number}>
+            +7 (495) 215-11-99
           </a>
         </div>
         <div className={styles.burger}>

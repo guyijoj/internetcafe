@@ -105,7 +105,8 @@
 }
 
 .button {
-  background-color: coral;
+  background-color: var(--main-color);
+  color: var(--logo-color-font);
   border-radius: 16px;
   min-width: 25rem;
   text-align: center;
