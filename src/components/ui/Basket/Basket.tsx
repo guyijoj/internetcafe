@@ -9,7 +9,6 @@ import { useModal } from "../Modal/useModal";
 
 export const Basket = () => {
   const { items, total, clearCart } = useCart();
-  const [utensils, setUtensils] = useState(1);
   const { openModal } = useModal();
   return (
     <div className={`${styles.basketSection} `}>
@@ -39,12 +38,7 @@ export const Basket = () => {
                 <h2 className={styles.amount}>{total} ₽</h2>
               </div>
               <div className={styles.cutlery}>
-                <Counter
-                  value={utensils}
-                  onChange={setUtensils}
-                  min={0}
-                  max={10}
-                />
+                <Counter />
               </div>
 
               <button

@@ -30,12 +30,7 @@ export function ModalRoot() {
     case "mobileBasket":
       return <BasketMobileModal onClose={closeModal} payload={payload} />;
     case "checkout":
-      return (
-        <CheckoutModal
-          onClose={closeModal}
-          payload={payload as CheckoutProps}
-        />
-      );
+      return <CheckoutModal onClose={closeModal} />;
     default:
       return null; // неизвестная модалка
   }

@@ -15,6 +15,9 @@ type CartContextType = {
   removeItem: (id: number) => void;
   clearCart: () => void;
   total: number;
+  utensils: number;
+  incrementUtesils: () => void;
+  decrementUtensils: () => void;
   increment: (id: number, step?: number) => void;
   decrement: (id: number, step?: number) => void;
 };
@@ -23,6 +26,7 @@ const CartContext = createContext<CartContextType | null>(null);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [utensilQuantity, setUtensils] = useState(1);
   useEffect(() => {
     const stored = localStorage.getItem("cart");
     if (stored) setItems(JSON.parse(stored));
@@ -33,16 +37,22 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       const existing = prev.find((i) => i.id === item.id);
       if (existing) {
         return prev.map((i) =>
-          i.id === item.id ? { ...i, quatity: i.quantity + item.quantity } : i
+          i.id === item.id ? { ...i, quatity: i.quantity + item.quantity } : i,
         );
       }
       return [...prev, item];
     });
   };
+  const incrementUtesils = () => {
+    setUtensils(utensilQuantity + 1);
+  };
+  const decrementUtensils = () => {
+    if (utensilQuantity > 1) setUtensils(utensilQuantity - 1);
+  };
 
   const increment = (id: number, step = 1) =>
     setItems((prev) =>
-      prev.map((i) => (i.id == id ? { ...i, quantity: i.quantity + step } : i))
+      prev.map((i) => (i.id == id ? { ...i, quantity: i.quantity + step } : i)),
     );
 
   const decrement = (id: number, step = 1) =>
@@ -50,7 +60,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       (prev) =>
         prev
           .map((i) => (i.id === id ? { ...i, quantity: i.quantity - step } : i))
-          .filter((i) => i.quantity > 0) // если стало 0 — удаляем
+          .filter((i) => i.quantity > 0), // если стало 0 — удаляем
     );
 
   const removeItem = (id: number) => {
@@ -60,6 +70,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const clearCart = () => setItems([]);
 
   const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const utensils = utensilQuantity;
 
   return (
     <CartContext.Provider
@@ -69,6 +80,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         removeItem,
         clearCart,
         total,
+        utensils,
+        incrementUtesils,
+        decrementUtensils,
         increment,
         decrement,
       }}

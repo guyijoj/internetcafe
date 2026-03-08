@@ -1,45 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Checkout.module.css";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useModal } from "../Modal/useModal";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { email, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { pushCheckout, schema } from "../../../api/checkout";
+import { useCart } from "../../../context/CartContext";
 
-const schema = z.object({
-  name: z.string().min(1, "Напишите ваше имя!"),
-  phone: z
-    .string()
-    .regex(
-      /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/,
-      {
-        message: "Неверный формат номера телефона!",
-      },
-    )
-    .transform((val) => {
-      const cleaned = val.replace(/\D/g, "");
-      if (cleaned.length === 10) {
-        return `+7${cleaned}`;
-      }
-      if (cleaned.length === 11 && cleaned.startsWith("7")) {
-        return `+${cleaned}`;
-      }
-      if (cleaned.length === 11 && cleaned.startsWith("8")) {
-        return `+7${cleaned.substring(1)}`;
-      }
+export type FormFields = z.infer<typeof schema>;
 
-      return val;
-    }),
-  email: z.email("Неправильный формат email!"),
-  address: z.string().min(1, "Выберите адрес!"),
-  payment: z.string().min(1, "Выберите способ оплаты!"),
-  comment: z.string().max(200),
-});
-
-type FormFields = z.infer<typeof schema>;
-
-const Checkout = ({ total }: { total: number }) => {
+const Checkout = () => {
+  const { total, utensils, items } = useCart();
   const { openModal } = useModal();
   const {
     register,
@@ -60,18 +33,31 @@ const Checkout = ({ total }: { total: number }) => {
   }, [setValue]);
 
   const paymentHandler = (method: string) => {
-    setValue("payment", method);
+    setValue("payment", method, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
     setPayment(method);
   };
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(data);
+      await fetch(
+        "https://muieymqzgbmficprkyar.supabase.co/functions/v1/create-order",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            payment_method: data.payment,
+            comment: data.comment,
+            utensils: utensils,
+            total_price: total,
+            status: "active",
+          }),
+        },
+      );
     } catch (e) {
-      setError("email", {
-        message: "email is already taken",
-      });
+      console.error("Ошибка бд", e);
     }
   };
   return (
@@ -151,7 +137,6 @@ const Checkout = ({ total }: { total: number }) => {
           </button>
         </div>
       </div>
-
       <div
         className={`${styles.who} ${(errors.name || errors.phone || errors.email) && styles.errorInput}`}
       >

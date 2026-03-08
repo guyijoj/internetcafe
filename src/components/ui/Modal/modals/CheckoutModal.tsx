@@ -6,16 +6,10 @@ export type CheckoutProps = {
   total: number;
 };
 
-const CheckoutModal = ({
-  onClose,
-  payload,
-}: {
-  onClose: () => void;
-  payload: CheckoutProps;
-}) => {
+const CheckoutModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <ModalBase id="Checkout" title="Оформление" onClose={onClose}>
-      <Checkout total={payload.total} />
+      <Checkout />
     </ModalBase>
   );
 };
