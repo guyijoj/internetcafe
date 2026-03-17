@@ -1,8 +1,10 @@
 import styles from "./MenuSection.module.css";
 import CarouselMenu from "../../ui/CarouselMenu/CarouselMenu";
-import { Menu } from "../../ui/Menu/Menu";
+
 import { Basket } from "../../ui/Basket/Basket";
 import BasketMobile from "../../ui/Basket/BasketMobileButton";
+import { Menu } from "../../ui/Menu/Menu";
+
 
 export const MenuSection = () => {
   return (
@@ -17,7 +19,7 @@ export const MenuSection = () => {
         headerOffset={150}
       />
       <div className={styles.container}>
-        <Menu />
+        <Menu/>
         <Basket />
       </div>
       <div className={styles.basketMobile}>
