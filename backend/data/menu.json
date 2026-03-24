@@ -1,0 +1,51 @@
+{
+    "menu": [
+        { "category_id": 7,
+        "name":"Моти Клубника",
+        "description":"",
+        "price": 350,
+        "weight": 300,
+        "image_url": "https://muieymqzgbmficprkyar.supabase.co/storage/v1/object/sign/menu_images/MochiStrawberry.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xZGJlYjEzMC02MWIyLTRhZDYtYTI5OC1kYzAzZTA5OWQyNmMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtZW51X2ltYWdlcy9Nb2NoaVN0cmF3YmVycnkuanBlZyIsImlhdCI6MTc2NTY2NjU2NSwiZXhwIjoxNzk3MjAyNTY1fQ.QasssPby6CrJlMhzQPn8w_zaVPMMD6pQjIz-sxW3feE"
+        },
+        { "category_id": 7,
+        "name":"Моти Виноград",
+        "description":"",
+        "price": 350,
+        "weight": 300,
+        "image_url": "https://muieymqzgbmficprkyar.supabase.co/storage/v1/object/sign/menu_images/MochiGrape.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xZGJlYjEzMC02MWIyLTRhZDYtYTI5OC1kYzAzZTA5OWQyNmMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtZW51X2ltYWdlcy9Nb2NoaUdyYXBlLmpwZWciLCJpYXQiOjE3NjU2NjY1MDksImV4cCI6MTc5NzIwMjUwOX0.YVF0_XmF8VmS9cwAWGQcaQK0PrlrjDjiMy2WsUzRyhw"
+        },
+        { "category_id": 7,
+        "name":"Моти Ананас",
+        "description":"",
+        "price": 350,
+        "weight": 300,
+        "image_url": "https://muieymqzgbmficprkyar.supabase.co/storage/v1/object/sign/menu_images/MochiPineApple.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xZGJlYjEzMC02MWIyLTRhZDYtYTI5OC1kYzAzZTA5OWQyNmMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtZW51X2ltYWdlcy9Nb2NoaVBpbmVBcHBsZS5qcGVnIiwiaWF0IjoxNzY1NjY3MDYyLCJleHAiOjE3OTcyMDMwNjJ9.dVirsiHtVjz39XET8aV19XiyJSbGE06NrQvkU_otcDY"
+        },
+        { "category_id": 7,
+        "name":"Моти Манго",
+        "description":"",
+        "price": 350,
+        "weight": 300,
+        "image_url": "https://muieymqzgbmficprkyar.supabase.co/storage/v1/object/sign/menu_images/MochiMango.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xZGJlYjEzMC02MWIyLTRhZDYtYTI5OC1kYzAzZTA5OWQyNmMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtZW51X2ltYWdlcy9Nb2NoaU1hbmdvLmpwZWciLCJpYXQiOjE3NjU2NjY1NDgsImV4cCI6MTc5NzIwMjU0OH0.6RPc17DHvMpTg3rc1J4-4NxNDFlfspuLuCAyltxYbjo"
+        },
+        { "category_id": 7,
+        "name":"Лапша Булдак",
+        "description":"",
+        "price": 350,
+        "weight": 300,
+        "image_url": "https://muieymqzgbmficprkyar.supabase.co/storage/v1/object/sign/menu_images/WhatsApp%20Image%202025-11-29%20at%2012.46.13.jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xZGJlYjEzMC02MWIyLTRhZDYtYTI5OC1kYzAzZTA5OWQyNmMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtZW51X2ltYWdlcy9XaGF0c0FwcCBJbWFnZSAyMDI1LTExLTI5IGF0IDEyLjQ2LjEzLmpwZWciLCJpYXQiOjE3NjU2Njc5MjIsImV4cCI6MTc5NzIwMzkyMn0.HCE4ti1w3GDxcKd9bfoVKPcQd4UVpjoV_X0wJwfC2CA"
+        },
+        { "category_id": 7,
+        "name":"Лапша Булдак",
+        "description":"",
+        "price": 350,
+        "weight": 300,
+        "image_url": "https://muieymqzgbmficprkyar.supabase.co/storage/v1/object/sign/menu_images/WhatsApp%20Image%202025-11-29%20at%2012.46.12%20(2).jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV8xZGJlYjEzMC02MWIyLTRhZDYtYTI5OC1kYzAzZTA5OWQyNmMiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJtZW51X2ltYWdlcy9XaGF0c0FwcCBJbWFnZSAyMDI1LTExLTI5IGF0IDEyLjQ2LjEyICgyKS5qcGVnIiwiaWF0IjoxNzY1NjY3NDg4LCJleHAiOjE3OTcyMDM0ODh9.oKAi5bSRjLxSqOz1rYLwTgmfEx_Dn-OYuB8XOv4tL6k"
+        }
+
+
+
+        
+    ]
+    
+}

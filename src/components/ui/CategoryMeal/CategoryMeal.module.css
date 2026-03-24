@@ -7,12 +7,7 @@
   grid-template-columns: repeat(var(--menuCard-per-view), 1fr);
   gap: 1.2rem;
 }
-.title {
-  font-size: 3.6rem;
-  font-weight: 700;
-  margin-top: 3rem;
-  margin-bottom: 1.8rem;
-}
+
 
 /* адаптив */
 @media (max-width: 1500px) {

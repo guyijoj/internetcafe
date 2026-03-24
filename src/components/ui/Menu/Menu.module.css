@@ -1,4 +1,49 @@
+:root {
+  --menuCard-per-view: 5;
+}
+
+
 .menu {
   flex: 0 0 var(--menu-gallery-part);
   padding-right: 1.2rem;
 }
+
+.menuCards {
+  display: grid;
+  grid-template-columns: repeat(var(--menuCard-per-view), 1fr);
+  gap: 1.2rem;
+}
+
+.categoryTitle{
+
+    font-size: 3.6rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1.8rem;
+
+}
+
+@media (max-width: 1500px) {
+  :root {
+    --menuCard-per-view: 4;
+  }
+}
+@media (max-width: 1350px) {
+  :root {
+    --menuCard-per-view: 3;
+  }
+}
+@media (max-width: 1050px) {
+  :root {
+    --menuCard-per-view: 2;
+  }
+}
+@media (max-width: 900px) {
+  :root {
+    --menuCard-per-view: 3;
+  }
+}
+@media (max-width: 700px) {
+  :root {
+    --menuCard-per-view: 2;
+  }}

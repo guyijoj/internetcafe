@@ -7,13 +7,12 @@ export type CartItem = {
 };
 
 export type category = {
-  id: number;
-  name: string;
+  category_id: number;
+  category_name: string;
 };
 
 export type menuItem = {
   id: number;
-  category_id: number;
   name: string;
   description: string | null;
   price: number;
@@ -22,5 +21,5 @@ export type menuItem = {
 };
 
 export type categoryWithMenu = category & {
-  menu_items: menuItem[];
+  items: menuItem[];
 };
