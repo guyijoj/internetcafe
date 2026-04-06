@@ -30,7 +30,7 @@ export const Basket = () => {
               </div>
               <div className={styles.order}>
                 {items.map((item, i) => (
-                  <Order item={item} />
+                  <Order key={i} item={item} />
                 ))}
               </div>
               <div className={styles.total}>

@@ -5,7 +5,8 @@ import styles from "./CarouselMenu.module.css";
 import useEmblaCarousel from "embla-carousel-react";
 import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
 import { scrollToWithOffset } from "../../../../utils/scrollToWithOffset";
-import { useMenu } from "../../../context/MenuContext";
+import { category } from "../../../types/cart";
+// import { useMenu } from "../../../context/MenuContext";
 
 type CarouselMenuProps = {
   onClick?: () => void;
@@ -40,7 +41,8 @@ export default function CarouselMenu({
     ...options,
   });
 
-  const { categories } = useMenu();
+  // const { categories } = useMenu();
+  const [categories, setCategories] =useState<category[]>([]);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
 
@@ -67,6 +69,25 @@ export default function CarouselMenu({
     };
   }, [embla, onSelectIndexChange]);
 
+
+
+  useEffect(()=>{
+    async function loadCategories(){
+      try{
+        const response = await fetch("http://localhost:4000/api/categories")
+        if(!response.ok) throw new Error("Ошибка загрузки каруселя меню - " + response.status)
+        
+        const data =await response.json()
+        setCategories(data)
+
+      }catch(e){
+        console.error(e)
+      }
+    }
+
+    loadCategories()
+  }, [])
+
   const styleVars: React.CSSProperties = {
     // @ts-expect-error CSS var
     "--slides-per-view": String(slidesPerView),
@@ -89,19 +110,20 @@ export default function CarouselMenu({
 
       <div className={styles.viewport} ref={viewportRef}>
         <div className={styles.container}>
-          {categories.map((item) => {
+          {categories.map((category) => {
             const content = (
               <div className={styles.cardInner}>
-                <span className={styles.label}>{item.name}</span>
+
+                <span className={styles.label}>{category.category_name}</span>
               </div>
             );
 
             return (
-              <div key={item.id} className={styles.slide}>
+              <div key={category.category_id} className={styles.slide}>
                 <button
                   type="button"
                   className={styles.card}
-                  onClick={() => scrollToWithOffset(item.id, headerOffset)}
+                  onClick={() => scrollToWithOffset(category.category_id, headerOffset)}
                 >
                   {content}
                 </button>

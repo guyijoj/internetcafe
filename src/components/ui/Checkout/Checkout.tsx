@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useModal } from "../Modal/useModal";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
+import { email, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { pushCheckout, schema } from "../../../api/checkout";
 import { useCart } from "../../../context/CartContext";
@@ -42,20 +42,21 @@ const Checkout = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      await fetch(
-        "https://muieymqzgbmficprkyar.supabase.co/functions/v1/create-order",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            payment_method: data.payment,
-            comment: data.comment,
-            utensils: utensils,
-            total_price: total,
-            status: "active",
-          }),
+      const response = await fetch("http://localhost:4000/api/order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          name: data.name,
+          phone: data.phone,
+          email: data.email,
+        }),
+      });
+      if (!response.ok) throw new Error("Ошибка отправки заказа");
+
+      const result = await response.json();
+      console.log("Отправка успешна: ", result);
     } catch (e) {
       console.error("Ошибка бд", e);
     }
