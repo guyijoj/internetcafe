@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Restaurants.module.css";
 import { getRestaurants } from "../../../api/restaurants";
-import {
-  restaurantsInfo,
-  RestaurantsModalPayload,
-} from "../../../types/restaurants";
+import { restaurantsInfo } from "../../../types/restaurants";
 import { useModal } from "../Modal/useModal";
 import { useCart } from "../../../context/CartContext";
+import { useParams } from "react-router-dom";
 
 export const Restaurants = ({
   onClose,
@@ -17,26 +15,24 @@ export const Restaurants = ({
 }) => {
   const { total } = useCart();
   const { openModal } = useModal();
-  const [islocationTrue, setLocationTrue] = useState<string | null>(
-    localStorage.getItem("restaurant_id"),
-  );
-  const [isShowingTrue, setShowingTrue] = useState<string | null>(
-    localStorage.getItem("restaurant_id") || null,
-  );
+
+  const [islocationTrue, setLocationTrue] = useState<number | null>(() => {
+    return Number(localStorage.getItem("restaurant_id")) || 1;
+  });
+
   const [restaurants, setRestaurants] = useState<restaurantsInfo[]>([]);
   useEffect(() => {
     getRestaurants().then((data) => {
       setRestaurants(data);
-      if (!isShowingTrue && data.length > 0) setLocationTrue(data[0].id);
     });
   }, []);
+  const selectedRestaurant = restaurants.find((r) => r.id === islocationTrue);
 
   const buttonEvent = (goBack: boolean) => {
     if (!islocationTrue) return;
-    const restaurant = restaurants.find((r) => r.id === islocationTrue);
-    if (!restaurant) return;
-    localStorage.setItem("restaurant_id", islocationTrue);
-    localStorage.setItem("restaurant_city", restaurant.city);
+    if (!selectedRestaurant) return;
+    localStorage.setItem("restaurant_id", String(islocationTrue));
+    localStorage.setItem("restaurant_city", selectedRestaurant.city);
     if (goBack) {
       openModal("checkout", { total: total });
     } else {
@@ -48,9 +44,9 @@ export const Restaurants = ({
   return (
     <div className={styles.body}>
       <div className={styles.tab}>
-        {restaurants.map((restaurant, index) => (
+        {restaurants.map((restaurant) => (
           <button
-            key={index}
+            key={restaurant.id}
             onClick={() => setLocationTrue(restaurant.id)}
             className={`${styles.metro} ${
               islocationTrue === restaurant.id ? styles.metroTrue : ""
@@ -60,14 +56,14 @@ export const Restaurants = ({
           </button>
         ))}
       </div>
-      {restaurants.map((restaurant, index) => (
+      {selectedRestaurant && (
         <div
-          key={index}
-          className={`${styles.card} ${islocationTrue === restaurant.id ? styles.cardTrue : ""}`}
+          key={selectedRestaurant.id}
+          className={`${styles.card} ${islocationTrue === selectedRestaurant.id ? styles.cardTrue : ""}`}
         >
           <div className={styles.photoCon}>
             <img
-              src={`${restaurant.photo}`}
+              src={`${selectedRestaurant.photo}`}
               alt="restaurant"
               className={styles.photo}
             />
@@ -75,24 +71,27 @@ export const Restaurants = ({
           <div className={styles.infoPart}>
             <div>
               <h3>Адрес:</h3>
-              <p className={styles.info}>{restaurant.address}</p>
+              <p className={styles.info}>{selectedRestaurant.address}</p>
 
               <h3>График работы:</h3>
-              <p className={styles.info}>{restaurant.workingHours}</p>
+              <p className={styles.info}>{selectedRestaurant.workingHours}</p>
 
               <h3>Контакты</h3>
 
-              <a href={`tel:${restaurant.phone}`} className={styles.info}>
-                {restaurant.phone}
+              <a
+                href={`tel:${selectedRestaurant.phone}`}
+                className={styles.info}
+              >
+                {selectedRestaurant.phone}
               </a>
             </div>
 
-            <a href={restaurant.link} className={styles.link}>
+            <a href={selectedRestaurant.link} className={styles.link}>
               Посмотреть на карте &rarr;
             </a>
           </div>
         </div>
-      ))}
+      )}
       <button className={styles.btn} onClick={() => buttonEvent(goBack)}>
         Выбрать
       </button>

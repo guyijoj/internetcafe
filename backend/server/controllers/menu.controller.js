@@ -1,8 +1,8 @@
-const pool = require("../db")
+const pool = require("../db");
 
-exports.getMenu = async(req, res ) => {
-    try{
-        const result = await pool.query(`
+exports.getMenu = async (req, res) => {
+  try {
+    const result = await pool.query(`
             select 
                 c.category_id,
                 c.category_name,
@@ -21,8 +21,9 @@ exports.getMenu = async(req, res ) => {
             GROUP BY c.category_id, c.category_name
             order by c.category_id;`);
 
-      res.json(result.rows)
-    }catch(error){
-        console.log(error)
-        res.status(500).json({error: error.message})}
-}
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+};

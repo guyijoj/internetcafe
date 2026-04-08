@@ -1,5 +1,6 @@
 export type restaurantsInfo = {
-  id: string;
+  id: number;
+  restaurant_name: string;
   address: string;
   phone: string;
   city: string;

@@ -1,16 +1,14 @@
 import React from "react";
-import { supabase } from "../libs/supabaseClient";
+
 import { restaurantsInfo } from "../types/restaurants";
 
 export async function getRestaurants(): Promise<restaurantsInfo[]> {
-  const { data, error } = await supabase
-    .from("restaurants")
-    .select("id, address, phone, city, workingHours, photo, link")
-    .order("id");
-
-  if (error) {
-    console.error(error);
-    throw error;
+  try {
+    const response = await fetch(`http://localhost:4000/api/restaurants`);
+    const result = await response.json();
+    return result as restaurantsInfo[];
+  } catch (e) {
+    console.error(e);
+    return [];
   }
-  return data as restaurantsInfo[];
 }
