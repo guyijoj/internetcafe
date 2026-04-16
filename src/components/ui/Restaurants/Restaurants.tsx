@@ -4,7 +4,6 @@ import { getRestaurants } from "../../../api/restaurants";
 import { restaurantsInfo } from "../../../types/restaurants";
 import { useModal } from "../Modal/useModal";
 import { useCart } from "../../../context/CartContext";
-import { useParams } from "react-router-dom";
 
 export const Restaurants = ({
   onClose,

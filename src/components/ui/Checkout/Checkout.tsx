@@ -4,15 +4,15 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useModal } from "../Modal/useModal";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { email, z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { pushCheckout, schema } from "../../../api/checkout";
-import { useCart } from "../../../context/CartContext";
 
-export type FormFields = z.infer<typeof schema>;
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useCart } from "../../../context/CartContext";
+import { FormFields, schema } from "../../../types/checkoutForm";
+import { postOrder } from "../../../api/checkout";
 
 const Checkout = () => {
-  const { total, utensils, items } = useCart();
+  const { total, utensils, items, restaurantId } = useCart();
   const { openModal } = useModal();
   const {
     register,
@@ -40,26 +40,30 @@ const Checkout = () => {
     setPayment(method);
   };
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    try {
-      const response = await fetch("http://localhost:4000/api/order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: data.name,
-          phone: data.phone,
-          email: data.email,
-        }),
-      });
-      if (!response.ok) throw new Error("Ошибка отправки заказа");
-
-      const result = await response.json();
-      console.log("Отправка успешна: ", result);
-    } catch (e) {
-      console.error("Ошибка бд", e);
+  const onSubmit: SubmitHandler<FormFields> = async (dataForm) => {
+    if (!restaurantId) {
+      console.error("Ресторан не выбран");
+      return;
     }
+
+    const orderInfo = {
+      restaurantId: restaurantId,
+      dataForm: dataForm,
+      utensils: utensils,
+      items: items,
+    };
+
+    postOrder(orderInfo)
+      .then((data) => {
+        if (data.success) {
+          console.log("Отправка успешна: ", data);
+        } else {
+          console.error(data.error);
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
   return (
     <form className={styles.wrap} onSubmit={handleSubmit(onSubmit)}>

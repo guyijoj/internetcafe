@@ -5,10 +5,10 @@ import { categoryWithMenu, menuItem } from "../../../types/cart";
 
 import { useEffect, useState } from "react";
 
-
 import { useCart } from "../../../context/CartContext";
 import SkeletonMenu from "./MenuSkeleton";
 import MenuCard from "../MenuCard/MenuCard";
+import { loadMenu } from "../../../api/menu";
 
 export const Menu = () => {
   const [categories, setCategories] = useState<categoryWithMenu[]>([]);
@@ -28,31 +28,20 @@ export const Menu = () => {
   };
 
   useEffect(() => {
-    async function loadMenu() {
-      // await new Promise((resolve) => setTimeout(resolve, 8000));
-      try {
-        setloading(true);
-        setloading(false);
-        const response = await fetch("http://localhost:4000/api/menu");
-        if (!response.ok)
-          throw new Error(`Ошибка загрузки меню - ${response.status}`);
-
-        const data = await response.json();
+    setloading(false);
+    loadMenu()
+      .then((data) => {
         setCategories(data);
-      } catch (e) {
+      })
+      .catch((error) => {
+        console.error(error);
         setError("Не удалось загрузить меню");
-        console.error(e);
-      } finally {
-        setloading(false);
-      }
-    }
-
-    loadMenu();
+      });
   }, []);
   return (
     <>
       {loading ? (
-        <SkeletonMenu/>
+        <SkeletonMenu />
       ) : error ? (
         <>
           <div className={styles.error}>
@@ -61,7 +50,6 @@ export const Menu = () => {
           </div>
         </>
       ) : (
-        
         <div className={styles.menu}>
           {categories.map((category) => (
             <section

@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { CartItem } from "../types/cart";
+import { restaurantsInfo } from "../types/restaurants";
 
 type CartContextType = {
   items: CartItem[];
@@ -20,6 +21,7 @@ type CartContextType = {
   decrementUtensils: () => void;
   increment: (id: number, step?: number) => void;
   decrement: (id: number, step?: number) => void;
+  restaurantId: number | null;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -27,9 +29,12 @@ const CartContext = createContext<CartContextType | null>(null);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [utensilQuantity, setUtensils] = useState(1);
+  const [selectedRestaurantId, setRestaurantId] = useState<number | null>(null);
   useEffect(() => {
     const stored = localStorage.getItem("cart");
+    const restaurantsId = Number(localStorage.getItem("restaurant_id"));
     if (stored) setItems(JSON.parse(stored));
+    if (restaurantsId) setRestaurantId(restaurantsId);
   }, []);
 
   const addItem = (item: CartItem) => {
@@ -71,6 +76,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
   const utensils = utensilQuantity;
+  const restaurantId = selectedRestaurantId;
 
   return (
     <CartContext.Provider
@@ -85,6 +91,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         decrementUtensils,
         increment,
         decrement,
+        restaurantId,
       }}
     >
       {children}
