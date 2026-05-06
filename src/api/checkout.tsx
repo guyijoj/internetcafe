@@ -8,7 +8,7 @@ type apiResponse<T> = {
 
 export async function postOrder(data: OrderRequest): Promise<apiResponse<any>> {
   try {
-    const response = await fetch("http://localhost:4000/api/order", {
+    const response = await fetch("http://loalhost:4000/api/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

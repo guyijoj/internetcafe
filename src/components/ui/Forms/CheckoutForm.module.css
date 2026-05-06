@@ -1,0 +1,143 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+
+  column-gap: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100rem;
+}
+.second {
+  grid-column: 2;
+  grid-row: 1/3;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.who,
+.address,
+.payment,
+.total {
+  background-color: var(--sub-background);
+  padding: 1.4rem;
+  border-radius: 11px;
+}
+.payment {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.address {
+  margin-bottom: 2rem;
+}
+.title {
+  margin-bottom: 1rem;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+.inputAddress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+.addressBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.methods {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 0.5rem;
+}
+.method {
+  font-size: 1.8rem;
+  color: black;
+  font-style: inherit;
+  font-family: inherit;
+  background-color: var(--main-background);
+  padding: 1rem 2rem;
+  border-radius: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.methodOn {
+  background-color: var(--main-color);
+  color: var(--logo-color-font);
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.input {
+  min-height: 3.8rem;
+  padding: 1rem 2rem;
+  font-size: 1.8rem;
+  color: black;
+  font-weight: 500;
+  font-style: inherit;
+  font-family: inherit;
+  border-radius: 11px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--main-background);
+}
+.input:focus {
+  outline: none; /* Убираем стандартный outline */
+  box-shadow: 0 0 0 3px var(--main-color); /* Альтернатива outline */
+  border-radius: 4px; /* Для скругления углов тени */
+}
+
+.comment {
+  width: 100%;
+  font-style: inherit;
+  font-family: inherit;
+}
+.total {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}
+.sublabel {
+  font-size: 1.6rem;
+}
+.sum {
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+.btn {
+  width: 100%;
+  background-color: var(--main-color);
+  padding: 1.5rem 1rem;
+  color: var(--sub-background);
+  border-radius: 9px;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.4s;
+  margin-left: 2rem;
+}
+.btn:active,
+.btn:hover {
+  background-color: var(--main-color-light);
+}
+
+.errorMessage {
+  font-size: 1.5rem;
+  color: #ef233c;
+}
+.errorInput {
+  outline: none; /* Убираем стандартный outline */
+  box-shadow: 0 0 0 3px #ef233c; /* Альтернатива outline */
+  border-radius: 4px; /* Для скругления углов тени */
+}
+.hide {
+  display: none;
+}

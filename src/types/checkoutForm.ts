@@ -47,3 +47,5 @@ export interface OrderRequest {
   utensils:number,
   items : CartItem[]
 }
+
+export type StatusValue =  "idle" | "success" | "error";
