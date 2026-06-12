@@ -1,14 +1,16 @@
 "use client";
-import { useCallback, useMemo, useState } from "react";
 import styles from "./Counter.module.css";
-import { useCart } from "../../../context/CartContext";
+import { useAppDispatch, useAppSelector } from "../../../stores/hooks";
+import {
+  decreaseUtensils,
+  increaseUtensils,
+  selectUtensilsItem,
+} from "../../../stores/slices/cartSLice";
 
 type Props = {
   label?: string;
-
   min?: number;
   max?: number;
-
   className?: string;
 };
 
@@ -18,31 +20,16 @@ export const Counter = ({
   max = 20,
   className,
 }: Props) => {
-  const { utensils, incrementUtesils, decrementUtensils } = useCart();
-
+  const utensils = useAppSelector(selectUtensilsItem);
+  const dispatch = useAppDispatch();
   const decDisabled = utensils < min;
   const incDisabled = utensils >= max;
-
-  // // Доступность с клавиатуры (← уменьшить, → увеличить)
-  // const keyHandler = useCallback(
-  //   (e: React.KeyboardEvent<HTMLDivElement>) => {
-  //     if (e.key === "ArrowLeft") {
-  //       e.preventDefault();
-  //       !decDisabled && decrementUtensils();
-  //     } else if (e.key === "ArrowRight") {
-  //       e.preventDefault();
-  //       !incDisabled && incrementUtesils();
-  //     }
-  //   },
-  //   [decDisabled, incDisabled, incrementUtesils, decrementUtensils],
-  // );
 
   return (
     <div
       className={[styles.row, className].filter(Boolean).join(" ")}
       role="group"
       tabIndex={0}
-      // onKeyDown={keyHandler}
     >
       <div className={styles.label}>{label}</div>
 
@@ -51,7 +38,7 @@ export const Counter = ({
           type="button"
           className={styles.btn}
           aria-label="Убавить"
-          onClick={decrementUtensils}
+          onClick={() => dispatch(decreaseUtensils())}
           disabled={decDisabled}
         >
           –
@@ -65,7 +52,7 @@ export const Counter = ({
           type="button"
           className={styles.btn}
           aria-label="Добавить"
-          onClick={incrementUtesils}
+          onClick={() => dispatch(increaseUtensils())}
           disabled={incDisabled}
         >
           +

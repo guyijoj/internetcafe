@@ -1,5 +1,3 @@
-import React from "react";
-
 import { restaurantsInfo } from "../types/restaurants";
 
 export async function getRestaurants(): Promise<restaurantsInfo[]> {

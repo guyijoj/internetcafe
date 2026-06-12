@@ -8,9 +8,15 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useCart } from "../../../context/CartContext";
 import { FormFields, schema, StatusValue } from "../../../types/checkoutForm";
 import { postOrder } from "../../../api/checkout";
+import { useAppSelector } from "../../../stores/hooks";
+import {
+  selectCartItems,
+  selectCartTotal,
+  selectRestaurantsID,
+  selectUtensilsItem,
+} from "../../../stores/slices/cartSLice";
 
 type UserForm = {
   name: string;
@@ -23,7 +29,10 @@ const CheckoutForm = ({
 }: {
   status: (status: StatusValue) => void;
 }) => {
-  const { total, utensils, items, restaurantId } = useCart();
+  const items = useAppSelector(selectCartItems);
+  const utensils = useAppSelector(selectUtensilsItem);
+  const restaurantId = useAppSelector(selectRestaurantsID);
+  const total = useAppSelector(selectCartTotal);
   const { openModal } = useModal();
   const {
     register,
@@ -102,6 +111,7 @@ const CheckoutForm = ({
         console.error(e);
       });
   };
+
   return (
     <form className={styles.wrap} onSubmit={handleSubmit(onSubmit)}>
       <div

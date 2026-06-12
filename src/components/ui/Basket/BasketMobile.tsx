@@ -1,14 +1,21 @@
-import React, { useState } from "react";
 import styles from "./BasketMobile.module.css";
-import { useCart } from "../../../context/CartContext";
 import { GrBasket } from "react-icons/gr";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Order from "../Order/Order";
 import Counter from "../Counter/Counter";
+import { useAppDispatch, useAppSelector } from "../../../stores/hooks";
+import {
+  clearCart,
+  selectCartItems,
+  selectCartTotal,
+} from "../../../stores/slices/cartSLice";
 
 const BasketMobile = () => {
-  const { items, total, clearCart } = useCart();
-  const [utensils, setUtensils] = useState(1);
+  const items = useAppSelector(selectCartItems);
+  const total = useAppSelector(selectCartTotal);
+
+  const dispatch = useAppDispatch();
+
   return (
     <div className={`${styles.basketSection} `}>
       {items.length === 0 ? (
@@ -21,7 +28,7 @@ const BasketMobile = () => {
         <>
           <div className={`${styles.basket}`}>
             <div className={styles.trash}>
-              <FaRegTrashCan onClick={clearCart} size={25} />
+              <FaRegTrashCan onClick={() => dispatch(clearCart())} size={25} />
             </div>
             <div className={styles.order}>
               {items.map((item, i) => (
@@ -33,12 +40,7 @@ const BasketMobile = () => {
               <h2 className={styles.amount}>{total} ₽</h2>
             </div>
             <div className={styles.cutlery}>
-              <Counter
-                value={utensils}
-                onChange={setUtensils}
-                min={0}
-                max={10}
-              />
+              <Counter />
             </div>
 
             <div className={styles.submit}>

@@ -5,15 +5,17 @@ import App from "./App.jsx";
 import "./styles/theme.css";
 import { ModalRoot } from "./components/ui/Modal/ModalRoot.tsx";
 import { ModalProvider } from "./components/ui/Modal/ModalProvider.js";
-import { CartProvider } from "./context/CartContext.tsx";
+
+import { Provider } from "react-redux";
+import { store } from "./stores/stores.ts";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <CartProvider>
+    <Provider store={store}>
       <ModalProvider>
         <App />
         <ModalRoot />
       </ModalProvider>
-    </CartProvider>
+    </Provider>
   </StrictMode>,
 );

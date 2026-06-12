@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Restaurants.module.css";
 import { getRestaurants } from "../../../api/restaurants";
 import { restaurantsInfo } from "../../../types/restaurants";
 import { useModal } from "../Modal/useModal";
-import { useCart } from "../../../context/CartContext";
+import { useAppDispatch, useAppSelector } from "../../../stores/hooks";
+import {
+  selectCartTotal,
+  setRestaurantId,
+} from "../../../stores/slices/cartSLice";
 
 export const Restaurants = ({
   onClose,
@@ -12,11 +16,12 @@ export const Restaurants = ({
   onClose: () => void;
   goBack: boolean;
 }) => {
-  const { total } = useCart();
+  const total = useAppSelector(selectCartTotal);
+  const dispatch = useAppDispatch();
   const { openModal } = useModal();
 
   const [islocationTrue, setLocationTrue] = useState<number | null>(() => {
-    return Number(localStorage.getItem("restaurant_id")) || 1;
+    return Number(localStorage.getItem("restaurant_id")) || null;
   });
 
   const [restaurants, setRestaurants] = useState<restaurantsInfo[]>([]);
@@ -30,6 +35,7 @@ export const Restaurants = ({
   const buttonEvent = (goBack: boolean) => {
     if (!islocationTrue) return;
     if (!selectedRestaurant) return;
+    dispatch(setRestaurantId(selectedRestaurant.id));
     localStorage.setItem("restaurant_id", String(islocationTrue));
     localStorage.setItem("restaurant_city", selectedRestaurant.city);
     if (goBack) {

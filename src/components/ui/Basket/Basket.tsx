@@ -1,14 +1,21 @@
-import { useState } from "react";
 import { GrBasket } from "react-icons/gr";
 import { FaRegTrashCan } from "react-icons/fa6";
 import styles from "./Basket.module.css";
-import { useCart } from "../../../context/CartContext";
+
 import Counter from "../Counter/Counter";
 import Order from "../Order/Order";
 import { useModal } from "../Modal/useModal";
+import { useAppDispatch, useAppSelector } from "../../../stores/hooks";
+import {
+  clearCart,
+  selectCartItems,
+  selectCartTotal,
+} from "../../../stores/slices/cartSLice";
 
 export const Basket = () => {
-  const { items, total, clearCart } = useCart();
+  const items = useAppSelector(selectCartItems);
+  const total = useAppSelector(selectCartTotal);
+  const dispatch = useAppDispatch();
   const { openModal } = useModal();
   return (
     <div className={`${styles.basketSection} `}>
@@ -24,7 +31,10 @@ export const Basket = () => {
             <div className={`${styles.basket}`}>
               <div className={styles.headerBasket}>
                 <h2>Заказ</h2>
-                <a onClick={clearCart} className={styles.trash}>
+                <a
+                  onClick={() => dispatch(clearCart())}
+                  className={styles.trash}
+                >
                   <FaRegTrashCan size={25} />
                 </a>
               </div>

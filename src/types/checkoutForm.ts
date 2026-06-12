@@ -34,7 +34,7 @@ export const schema = z.object({
 export type FormFields = z.infer<typeof schema>;
 
 export interface OrderRequest {
-  restaurantId : number | null,
+  restaurantId : number ,
   dataForm: {
     name: string;
     phone: string;

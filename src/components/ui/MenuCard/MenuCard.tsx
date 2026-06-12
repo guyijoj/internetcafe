@@ -1,32 +1,30 @@
 "use client";
 
-import { MouseEventHandler, useState } from "react";
-import { useCart } from "../../../context/CartContext";
-import { CartItem } from "../../../types/cart";
+import { MouseEventHandler } from "react";
 import Quantity from "../Quantity/Quantity";
 import styles from "./MenuCard.module.css";
+import { useAppDispatch, useAppSelector } from "../../../stores/hooks";
+import { addItem, selectCartItems } from "../../../stores/slices/cartSLice";
 
 type MenuCardProps = {
+  itemId: number;
   imageSrc: string;
   imageAlt?: string;
   title: string;
   description: string | null;
   weightGrams?: number;
   priceRub: number;
-  onClick?: () => void;
-  counter: CartItem | undefined;
   disabled?: boolean;
 };
 
 const MenuCard = ({
+  itemId,
   imageSrc,
   imageAlt = "",
   title,
   description,
   weightGrams,
   priceRub,
-  onClick,
-  counter,
   disabled = false,
 }: MenuCardProps) => {
   const priceText = new Intl.NumberFormat("ru-RU", {
@@ -35,14 +33,25 @@ const MenuCard = ({
     maximumFractionDigits: 0,
   }).format(priceRub);
 
-  const [isSelected, setSelected] = useState(false);
-  const { increment, decrement } = useCart();
-
-  const counterchecked = counter ? counter.quantity : 0;
+  const dispatch = useAppDispatch();
+  const items = useAppSelector(selectCartItems);
+  const quantity =
+    items.find((item) => {
+      return item.id === itemId;
+    })?.quantity || 0;
+  const isSelected = quantity > 0;
 
   const clickButton: MouseEventHandler<HTMLButtonElement> = () => {
-    onClick?.();
-    setSelected(true);
+    dispatch(
+      addItem({
+        id: itemId,
+        name: title,
+        price: priceRub,
+        image: imageSrc,
+        quantity: 1,
+      }),
+    );
+    console.log(items);
   };
   return (
     <article className={styles.card} aria-label={title}>
@@ -58,15 +67,9 @@ const MenuCard = ({
         )}
       </div>
 
-      {isSelected && counterchecked > 0 ? (
+      {isSelected ? (
         <div className={`${styles.counter} ${styles.show}`}>
-          <Quantity
-            value={counter ? counterchecked : 0}
-            onDec={() => decrement(counter ? counter.id : 0)}
-            onInc={() => increment(counter ? counter.id : 0)}
-            min={1}
-            max={30}
-          />
+          <Quantity itemId={itemId} value={quantity} min={1} max={30} />
         </div>
       ) : (
         <div className={`${styles.footer} ${styles.show}`}>
@@ -77,7 +80,7 @@ const MenuCard = ({
             disabled={disabled}
             aria-label={`Добавить "${title}" за ${priceText}`}
           >
-            {priceText}
+            {`${priceRub} ₽ `}
           </button>
         </div>
       )}
