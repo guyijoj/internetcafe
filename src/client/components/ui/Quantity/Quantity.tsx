@@ -1,6 +1,9 @@
 import styles from "./Quantity.module.css";
-import { useAppDispatch } from "../../../stores/hooks";
-import { decreaseItem, increaseItem } from "../../../stores/slices/cartSLice";
+import { useAppDispatch } from "../../../../stores/hooks";
+import {
+  decreaseItem,
+  increaseItem,
+} from "../../../../stores/slices/cartSLice";
 
 interface QuantityProps {
   itemId: number;

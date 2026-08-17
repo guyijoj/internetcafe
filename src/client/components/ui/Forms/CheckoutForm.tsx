@@ -9,14 +9,14 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { FormFields, schema, StatusValue } from "../../../types/checkoutForm";
-import { postOrder } from "../../../api/checkout";
-import { useAppSelector } from "../../../stores/hooks";
+import { postOrder } from "../../../../api/checkout";
+import { useAppSelector } from "../../../../stores/hooks";
 import {
   selectCartItems,
   selectCartTotal,
   selectRestaurantsID,
   selectUtensilsItem,
-} from "../../../stores/slices/cartSLice";
+} from "../../../../stores/slices/cartSLice";
 
 type UserForm = {
   name: string;

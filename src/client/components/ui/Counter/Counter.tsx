@@ -1,11 +1,11 @@
 "use client";
 import styles from "./Counter.module.css";
-import { useAppDispatch, useAppSelector } from "../../../stores/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../stores/hooks";
 import {
   decreaseUtensils,
   increaseUtensils,
   selectUtensilsItem,
-} from "../../../stores/slices/cartSLice";
+} from "../../../../stores/slices/cartSLice";
 
 type Props = {
   label?: string;

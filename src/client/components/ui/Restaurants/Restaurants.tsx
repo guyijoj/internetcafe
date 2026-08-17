@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import styles from "./Restaurants.module.css";
-import { getRestaurants } from "../../../api/restaurants";
+import { getRestaurants } from "../../../../api/restaurants";
 import { restaurantsInfo } from "../../../types/restaurants";
 import { useModal } from "../Modal/useModal";
-import { useAppDispatch, useAppSelector } from "../../../stores/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../stores/hooks";
 import {
   selectCartTotal,
   setRestaurantId,
-} from "../../../stores/slices/cartSLice";
+} from "../../../../stores/slices/cartSLice";
 
 export const Restaurants = ({
   onClose,
@@ -20,8 +20,8 @@ export const Restaurants = ({
   const dispatch = useAppDispatch();
   const { openModal } = useModal();
 
-  const [islocationTrue, setLocationTrue] = useState<number | null>(() => {
-    return Number(localStorage.getItem("restaurant_id")) || null;
+  const [islocationTrue, setLocationTrue] = useState<number>(() => {
+    return Number(localStorage.getItem("restaurant_id")) || 1;
   });
 
   const [restaurants, setRestaurants] = useState<restaurantsInfo[]>([]);

@@ -3,8 +3,8 @@
 import { MouseEventHandler } from "react";
 import Quantity from "../Quantity/Quantity";
 import styles from "./MenuCard.module.css";
-import { useAppDispatch, useAppSelector } from "../../../stores/hooks";
-import { addItem, selectCartItems } from "../../../stores/slices/cartSLice";
+import { useAppDispatch, useAppSelector } from "../../../../stores/hooks";
+import { addItem, selectCartItems } from "../../../../stores/slices/cartSLice";
 
 type MenuCardProps = {
   itemId: number;
@@ -69,7 +69,7 @@ const MenuCard = ({
 
       {isSelected ? (
         <div className={`${styles.counter} ${styles.show}`}>
-          <Quantity itemId={itemId} value={quantity} min={1} max={30} />
+          <Quantity itemId={itemId} value={quantity} max={30} />
         </div>
       ) : (
         <div className={`${styles.footer} ${styles.show}`}>

@@ -1,9 +1,8 @@
 import styles from "./Navigation.module.css";
 
 import { useModal } from "../../ui/Modal/useModal";
-import { FaPhoneAlt } from "react-icons/fa";
 import HamburgerMenu from "../../ui/HamburgerMenu/HamburgerMenu";
-export const Navigation = () => {
+const Navigation = () => {
   const { openModal } = useModal();
 
   return (
@@ -40,3 +39,4 @@ export const Navigation = () => {
     </>
   );
 };
+export default Navigation;

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 import SkeletonMenu from "./MenuSkeleton";
 import MenuCard from "../MenuCard/MenuCard";
-import { loadMenu } from "../../../api/menu";
+import { loadMenu } from "../../../../api/menu";
 
 export const Menu = () => {
   const [categories, setCategories] = useState<categoryWithMenu[]>([]);

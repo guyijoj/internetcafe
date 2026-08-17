@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./CarouselMenu.module.css";
 import useEmblaCarousel from "embla-carousel-react";
 import type { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
-import { scrollToWithOffset } from "../../../../utils/scrollToWithOffset";
+import { scrollToWithOffset } from "../../../../../utils/scrollToWithOffset";
 import { category } from "../../../types/cart";
 // import { useMenu } from "../../../context/MenuContext";
 
@@ -42,7 +42,7 @@ export default function CarouselMenu({
   });
 
   // const { categories } = useMenu();
-  const [categories, setCategories] =useState<category[]>([]);
+  const [categories, setCategories] = useState<category[]>([]);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
 
@@ -69,24 +69,22 @@ export default function CarouselMenu({
     };
   }, [embla, onSelectIndexChange]);
 
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const response = await fetch("http://localhost:4000/api/categories");
+        if (!response.ok)
+          throw new Error("Ошибка загрузки каруселя меню - " + response.status);
 
-
-  useEffect(()=>{
-    async function loadCategories(){
-      try{
-        const response = await fetch("http://localhost:4000/api/categories")
-        if(!response.ok) throw new Error("Ошибка загрузки каруселя меню - " + response.status)
-        
-        const data =await response.json()
-        setCategories(data)
-
-      }catch(e){
-        console.error(e)
+        const data = await response.json();
+        setCategories(data);
+      } catch (e) {
+        console.error(e);
       }
     }
 
-    loadCategories()
-  }, [])
+    loadCategories();
+  }, []);
 
   const styleVars: React.CSSProperties = {
     // @ts-expect-error CSS var
@@ -113,7 +111,6 @@ export default function CarouselMenu({
           {categories.map((category) => {
             const content = (
               <div className={styles.cardInner}>
-
                 <span className={styles.label}>{category.category_name}</span>
               </div>
             );
@@ -123,7 +120,9 @@ export default function CarouselMenu({
                 <button
                   type="button"
                   className={styles.card}
-                  onClick={() => scrollToWithOffset(category.category_id, headerOffset)}
+                  onClick={() =>
+                    scrollToWithOffset(category.category_id, headerOffset)
+                  }
                 >
                   {content}
                 </button>

@@ -5,12 +5,12 @@ import styles from "./Basket.module.css";
 import Counter from "../Counter/Counter";
 import Order from "../Order/Order";
 import { useModal } from "../Modal/useModal";
-import { useAppDispatch, useAppSelector } from "../../../stores/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../stores/hooks";
 import {
   clearCart,
   selectCartItems,
   selectCartTotal,
-} from "../../../stores/slices/cartSLice";
+} from "../../../../stores/slices/cartSLice";
 
 export const Basket = () => {
   const items = useAppSelector(selectCartItems);

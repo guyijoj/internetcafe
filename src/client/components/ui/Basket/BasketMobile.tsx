@@ -3,12 +3,12 @@ import { GrBasket } from "react-icons/gr";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Order from "../Order/Order";
 import Counter from "../Counter/Counter";
-import { useAppDispatch, useAppSelector } from "../../../stores/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../stores/hooks";
 import {
   clearCart,
   selectCartItems,
   selectCartTotal,
-} from "../../../stores/slices/cartSLice";
+} from "../../../../stores/slices/cartSLice";
 
 const BasketMobile = () => {
   const items = useAppSelector(selectCartItems);
