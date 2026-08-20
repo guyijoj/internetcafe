@@ -1,0 +1,72 @@
+.main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logInForm {
+  width: 350px;
+  padding: 32px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: white;
+}
+
+.logInForm h2 {
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.input {
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+.inputError {
+  border: 2px solid #ef233c;
+}
+
+.input:focus {
+  border-color: var(--main-color);
+}
+
+.submitButton {
+  padding: 12px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  color: white;
+
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+.toSubmitButton {
+  background: var(--main-color);
+}
+
+.toSubmitButton:hover {
+  background: var(--main-color-light);
+}
+
+.isSubmittingButton {
+  background: var(--main-color-dark);
+  cursor: not-allowed;
+}
+
+.requiredError {
+  color: #ef233c;
+  font-size: 1.3rem;
+  font-weight: 500;
+}

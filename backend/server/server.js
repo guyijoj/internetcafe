@@ -21,6 +21,9 @@ app.use("/api/categories", categoriesRoutes);
 const orderRoutes = require("./routes/order");
 app.use("/api/order", orderRoutes);
 
+const logInRoutes = require("./routes/logIn");
+app.use("/api/auth", logInRoutes);
+
 app.listen(process.env.PORT, () => {
   console.log("SERVER IS RUNNING ON PORT", process.env.PORT);
 });
