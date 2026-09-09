@@ -28,6 +28,7 @@ export default defineConfig([
   },
   {
     files: ["backend/**/*.js"],
+    extends: [js.configs.recommended],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "commonjs",

@@ -16,13 +16,34 @@ const LogInPage = () => {
 
   const onSubmit = async (data: LogInInput) => {
     try {
-      const response = await login(data);
-      if (!response.success) {
+      const loginResponse = await login(data);
+      if (!loginResponse.success) {
         setError("root.serverError", {
-          message: response.errors,
+          message: loginResponse.errors,
         });
+        return;
       }
-      console.log(response);
+
+      const tokenResponse = await fetch(
+        "http://localhost:4000/api/auth/admin-check",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${loginResponse.access_token}`,
+          },
+          credentials: "include",
+        },
+      );
+
+      const result = await tokenResponse.json();
+      console.log(result);
+      if (!tokenResponse.ok) {
+        setError("root.serverError", {
+          message: result.message ?? "Не удалось проверить авторизацию",
+        });
+
+        return;
+      }
     } catch {
       setError("root.serverError", {
         message: "Ошибка сервера",

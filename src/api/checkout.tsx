@@ -1,4 +1,4 @@
-import { OrderRequest } from "../types/checkoutForm";
+import { OrderRequest } from "../client/types/checkoutForm";
 
 type apiResponse<T> = {
   success: boolean;
@@ -31,6 +31,7 @@ export async function postOrder(data: OrderRequest): Promise<apiResponse<any>> {
         error: "Ошибка отправки заказа",
       };
     const result = await response.json();
+
     return {
       success: true,
       data: result,

@@ -65,6 +65,18 @@ const CheckoutForm = ({
     const updatedform = { ...userForm, [name]: value };
     setUserForm(updatedform);
     localStorage.setItem("savedInfoUser", JSON.stringify(updatedform));
+
+    if (
+      name === "name" ||
+      name === "phone" ||
+      name === "email" ||
+      name === "comment"
+    ) {
+      setValue(name, value, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+    }
   };
 
   useEffect(() => {
@@ -178,7 +190,7 @@ const CheckoutForm = ({
             className={`${styles.input} ${styles.comment} `}
             placeholder="Комментарий к заказу"
             value={userForm.comment}
-            onChange={(e) => handleSavedInfo(e)}
+            onChange={handleSavedInfo}
           />
         </div>
         <div className={styles.total}>
@@ -202,7 +214,7 @@ const CheckoutForm = ({
             type="text"
             placeholder="Имя"
             value={userForm.name}
-            onChange={(e) => handleSavedInfo(e)}
+            onChange={handleSavedInfo}
           />
           {errors.name && (
             <div className={styles.errorMessage}>{errors.name.message}</div>
@@ -213,7 +225,7 @@ const CheckoutForm = ({
             type="text"
             placeholder="Номер телефон"
             value={userForm.phone}
-            onChange={(e) => handleSavedInfo(e)}
+            onChange={handleSavedInfo}
           />
           {errors.phone && (
             <div className={styles.errorMessage}>{errors.phone.message}</div>
@@ -225,7 +237,7 @@ const CheckoutForm = ({
             type="text"
             placeholder="Email"
             value={userForm.email}
-            onChange={(e) => handleSavedInfo(e)}
+            onChange={handleSavedInfo}
           />
           {errors.email && (
             <div className={styles.errorMessage}>{errors.email.message}</div>
