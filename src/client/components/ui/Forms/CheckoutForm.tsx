@@ -1,14 +1,14 @@
-import React from "react";
+import type React from "react";
 import { useEffect, useState } from "react";
 import styles from "./CheckoutForm.module.css";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useModal } from "../Modal/useModal";
 
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { FormFields, schema, StatusValue } from "../../../types/checkoutForm";
+import { type FormFields, schema, type StatusValue } from "../../../types/checkoutForm";
 import { postOrder } from "../../../../api/checkout";
 import { useAppSelector } from "../../../../stores/hooks";
 import {
@@ -37,13 +37,13 @@ const CheckoutForm = ({
   const {
     register,
     handleSubmit,
-    setError,
     setValue,
     watch,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({ resolver: zodResolver(schema) });
   const restaurant = watch("address");
   const [payment, setPayment] = useState<string>("");
+  const [isOrderCreated, setIsOrderCreated] = useState(false);
   const [userForm, setUserForm] = useState<UserForm>(() => {
     const form = localStorage.getItem("savedInfoUser");
 
@@ -95,6 +95,8 @@ const CheckoutForm = ({
   };
 
   const onSubmit: SubmitHandler<FormFields> = async (dataForm) => {
+    if (isOrderCreated) return;
+
     if (!restaurantId) {
       console.error("Ресторан не выбран");
       return;
@@ -107,21 +109,25 @@ const CheckoutForm = ({
       items: items,
     };
 
-    postOrder(orderInfo)
-      .then((data) => {
-        if (data.success) {
-          status("success");
-          localStorage.removeItem("savedInfoUser");
-          setTimeout(() => {
-            window.location.reload();
-          }, 3000);
-        } else {
-          status("error");
-        }
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+    try {
+      const result = await postOrder(orderInfo);
+
+      if (!result.success) {
+        status("error");
+        return;
+      }
+
+      setIsOrderCreated(true);
+      status("success");
+      localStorage.removeItem("savedInfoUser");
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    } catch (error) {
+      console.error(error);
+      status("error");
+    }
   };
 
   return (
@@ -198,8 +204,16 @@ const CheckoutForm = ({
             <p className={styles.sublabel}>Итог:</p>
             <p className={styles.sum}>{total}₽</p>
           </div>
-          <button disabled={isSubmitting} type="submit" className={styles.btn}>
-            {isSubmitting ? "Loading" : "Оформить"}
+          <button
+            disabled={isSubmitting || isOrderCreated}
+            type="submit"
+            className={styles.btn}
+          >
+            {isOrderCreated
+              ? "Заказ оформлен"
+              : isSubmitting
+                ? "Отправка..."
+                : "Оформить"}
           </button>
         </div>
       </div>

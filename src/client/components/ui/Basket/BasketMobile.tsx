@@ -31,8 +31,8 @@ const BasketMobile = () => {
               <FaRegTrashCan onClick={() => dispatch(clearCart())} size={25} />
             </div>
             <div className={styles.order}>
-              {items.map((item, i) => (
-                <Order item={item} />
+              {items.map((item) => (
+                <Order key={item.id} item={item} />
               ))}
             </div>
             <div className={styles.total}>

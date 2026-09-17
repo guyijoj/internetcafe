@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Basket.module.css";
 import { PiBasket } from "react-icons/pi";
 import { useModal } from "../Modal/useModal";

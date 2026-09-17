@@ -1,4 +1,3 @@
-import React from "react";
 import Navigation from "./components/layouts/Navigation/Navigation";
 import Footer from "./components/layouts/Footer/Footer.js";
 import PromoSection from "./components/layouts/PromoSection/PromoSection.js";

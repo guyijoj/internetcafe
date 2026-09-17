@@ -1,4 +1,4 @@
-import { categoryWithMenu } from "../types/cart";
+import type { categoryWithMenu } from "../client/types/cart";
 
 export async function loadMenu(): Promise<categoryWithMenu[]> {
   try {

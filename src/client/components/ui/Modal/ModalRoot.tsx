@@ -5,7 +5,7 @@ import { RestaurantsModal } from "./modals/RestaurantsModal";
 import { JobsModal } from "./modals/JobsModal";
 import { BasketMobileModal } from "./modals/MobileBasketModal";
 
-import CheckoutModal, { CheckoutProps } from "./modals/CheckoutModal";
+import CheckoutModal from "./modals/CheckoutModal";
 import { RestaurantsModalPayload } from "../../../types/restaurants";
 
 /**

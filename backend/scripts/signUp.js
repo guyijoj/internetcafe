@@ -1,15 +1,16 @@
 const pool = require("../server/db");
 const bcrypt = require("bcrypt");
-const { Loginschema } = require("../server/schema/auth.schema");
+const { SignUpschema } = require("../server/schema/auth.schema");
 const { generateToken, saveToken } = require("../server/service/token-service");
 
-async function signUp(logForm, passForm) {
-  const validation = Loginschema.safeParse({
+async function signUp(logForm, passForm, roleForm) {
+  const validation = SignUpschema.safeParse({
     login: logForm,
     password: passForm,
+    role: roleForm,
   });
   if (!validation.success) {
-    console.log("Validation error");
+    console.error("Validation error: ", validation.error);
     return;
   }
   const hashPassword = await bcrypt.hash(passForm, 12);
@@ -20,11 +21,11 @@ async function signUp(logForm, passForm) {
 
     const existingAdmin = await newAdmin.query(
       `
-              insert into admins(email, password_hash, role)
-              values($1, $2, 'admin_primary')
+              insert into staff(email, password_hash, role)
+              values($1, $2, $3)
               returning id, email, password_hash, role
           `,
-      [logForm, hashPassword],
+      [logForm, hashPassword, roleForm],
     );
 
     const { id, email, password_hash, role } = existingAdmin.rows[0];
@@ -47,4 +48,4 @@ async function signUp(logForm, passForm) {
     newAdmin.release();
   }
 }
-signUp("test11@mail.ru", "knopka");
+signUp("kitchen@mail.ru", "knopka", "kitchen");

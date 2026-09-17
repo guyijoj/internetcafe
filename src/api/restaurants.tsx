@@ -1,4 +1,4 @@
-import { restaurantsInfo } from "../types/restaurants";
+import type { restaurantsInfo } from "../client/types/restaurants";
 
 export async function getRestaurants(): Promise<restaurantsInfo[]> {
   try {

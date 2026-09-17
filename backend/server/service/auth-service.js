@@ -2,7 +2,7 @@ async function validateUser(name, phone, email, pool) {
   try {
     const existingUser = await pool.query(
       `
-            select * from users
+            select * from customer
             where user_email =$1;
             `,
       [email],
@@ -11,7 +11,7 @@ async function validateUser(name, phone, email, pool) {
     if (existingUser.rows.length === 0) {
       const createNewUser = await pool.query(
         `
-            insert into users(user_name, user_phone, user_email)
+            insert into customer(user_name, user_phone, user_email)
             values($1, $2, $3)
             RETURNING id;
             `,

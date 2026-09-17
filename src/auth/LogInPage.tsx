@@ -1,9 +1,10 @@
-import React from "react";
 import styles from "./LoginPage.module.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LogInInput, Loginschema } from "./types/schema";
-import { login } from "./api/auth";
+import { type LogInInput, Loginschema } from "./types/schema";
+import { checkToken, login } from "./api/auth";
+import { useNavigate } from "react-router-dom";
+import { ROLES } from "./roles";
 
 const LogInPage = () => {
   const {
@@ -13,36 +14,28 @@ const LogInPage = () => {
 
     formState: { errors, isSubmitting },
   } = useForm<LogInInput>({ resolver: zodResolver(Loginschema) });
+  const navigate = useNavigate();
 
   const onSubmit = async (data: LogInInput) => {
     try {
       const loginResponse = await login(data);
       if (!loginResponse.success) {
-        setError("root.serverError", {
-          message: loginResponse.errors,
-        });
-        return;
+        console.error(loginResponse.errors);
+        throw new Error();
       }
 
-      const tokenResponse = await fetch(
-        "http://localhost:4000/api/auth/admin-check",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${loginResponse.access_token}`,
-          },
-          credentials: "include",
-        },
-      );
+      const tokenResponse = await checkToken(loginResponse.access_token);
+      if (!tokenResponse.success) {
+        console.error(tokenResponse.message);
+        throw new Error();
+      }
 
-      const result = await tokenResponse.json();
-      console.log(result);
-      if (!tokenResponse.ok) {
-        setError("root.serverError", {
-          message: result.message ?? "Не удалось проверить авторизацию",
-        });
+      sessionStorage.setItem("access_token", loginResponse.access_token);
 
-        return;
+      if (ROLES.KITCHEN.includes(tokenResponse.userInfo.role)) {
+        navigate("/kitchen", { replace: true });
+      } else if (ROLES.ADMIN.includes(tokenResponse.userInfo.role)) {
+        navigate("/admin", { replace: true });
       }
     } catch {
       setError("root.serverError", {

@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const pool = require("../db");
 const { Loginschema } = require("../schema/auth.schema");
 const { generateToken, saveToken } = require("../service/token-service");
+const { refreshCookieOptions } = require("../config/cookieConfig");
 
 exports.postAuth = async (req, res) => {
   const validation = Loginschema.safeParse(req.body);
@@ -16,11 +17,10 @@ exports.postAuth = async (req, res) => {
   try {
     const existingAdmin = await pool.query(
       `
-      select * from admins where email = $1;
+      select * from staff where email = $1;
     `,
       [login],
     );
-    console.log("ERRORORORORO");
 
     if (existingAdmin.rows.length === 0) throw new Error();
     const user = existingAdmin.rows[0];
@@ -36,11 +36,7 @@ exports.postAuth = async (req, res) => {
     });
     await saveToken(user.id, refreshToken, pool);
 
-    res.cookie("refresh_token", refreshToken, {
-      maxAge: 30 * 24 * 60 * 60 * 1000,
-      httpOnly: true,
-      sameSite: "strict",
-    });
+    res.cookie("refresh_token", refreshToken, refreshCookieOptions);
 
     return res.json({
       success: true,
@@ -51,8 +47,7 @@ exports.postAuth = async (req, res) => {
         user_role: user.role,
       },
     });
-  } catch (e) {
-    console.log(e);
+  } catch {
     return res.status(401).json({
       success: false,
       errors: "Неправильное логин и пароль",

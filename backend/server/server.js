@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-
+const cookieParser = require("cookie-parser");
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -12,6 +12,7 @@ app.use(
   }),
 );
 app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("API works");

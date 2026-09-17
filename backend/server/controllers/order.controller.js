@@ -75,5 +75,7 @@ exports.createorder = async (req, res) => {
     console.error(message);
 
     return res.status(500).json({ message: "server error", error: message });
+  } finally {
+    client.release();
   }
 };

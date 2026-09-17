@@ -1,10 +1,6 @@
 import styles from "./Vacancy.module.css";
 
-type Props = {
-  onApplyClick?: () => void; // можешь пробросить openModal('jobs')
-};
-
-export function Vacancy({ onApplyClick }: Props) {
+export function Vacancy() {
   return (
     <section className={styles.wrap} aria-labelledby="careers-title">
       <div className={styles.container}>
@@ -43,25 +39,6 @@ export function Vacancy({ onApplyClick }: Props) {
               <li>Гибкие графики: 2/2, 5/2</li>
               <li>Обучение и быстрый карьерный рост</li>
             </ul>
-
-            {/* <div className={styles.actions}>
-              <a href="/careers" className={styles.btnPrimary}>
-                Открытые вакансии
-              </a>
-              {onApplyClick ? (
-                <button
-                  type="button"
-                  className={styles.btnSecondary}
-                  onClick={onApplyClick}
-                >
-                  Отправить резюме
-                </button>
-              ) : (
-                <a href="/careers/apply" className={styles.btnSecondary}>
-                  Отправить резюме
-                </a>
-              )}
-            </div> */}
 
             <div className={styles.meta}>
               <span className={styles.tag}>Москва</span>
