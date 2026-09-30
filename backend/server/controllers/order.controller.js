@@ -79,3 +79,63 @@ exports.createorder = async (req, res) => {
     client.release();
   }
 };
+
+exports.getorder = async (req, res) => {
+  const restaurantId = 1;
+
+  if (!Number.isInteger(restaurantId) && restaurantId <= 0) {
+    return res.status(403).json({
+      success: false,
+      message: "Нет доступа к ресторану",
+    });
+  }
+  try {
+    const result = await pool.query(
+      `
+      SELECT
+          o.id,
+          o.order_number,
+          o.restaurant_id,
+          o.payment_method,
+          o.total_price,
+          o.comment,
+          o.utensils,
+          COALESCE(
+            (
+              SELECT json_agg(
+                json_build_object(
+                  'id', oi.menu_item_id,
+                  'name', mi.name,
+                  'quantity', oi.quantity,
+                  'price', oi.price_at_time
+                )
+                ORDER BY oi.id
+              )
+              FROM order_items AS oi
+              JOIN menu_items AS mi
+                ON mi.item_id = oi.menu_item_id
+              WHERE oi.order_id = o.id
+            ),
+            '[]'::json
+          ) AS items
+        FROM orders AS o
+        WHERE o.restaurant_id = $1
+        ORDER BY o.id DESC
+        LIMIT 50
+      `,
+      [restaurantId],
+    );
+
+    return res.status(200).json({
+      success: true,
+      orders: result.rows,
+    });
+  } catch (error) {
+    console.error("Ошибка получения заказов:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Не удалось загрузить заказы",
+    });
+  }
+};

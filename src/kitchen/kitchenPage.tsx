@@ -1,10 +1,11 @@
-import LogOutButton from "../client/components/ui/LogoutButton/LogOutButton";
+import NavigationKitchen from "./components/Navigation/Navigation";
+import OrderPanel from "./components/OrdersPanel/OrderPanel";
 
 const kitchenPage = () => {
   return (
     <>
-      <h1>Kitchen</h1>
-      <LogOutButton />
+      <NavigationKitchen />
+      <OrderPanel />
     </>
   );
 };

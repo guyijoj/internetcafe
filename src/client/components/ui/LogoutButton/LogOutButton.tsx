@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { IoExitOutline } from "react-icons/io5";
+import styles from "./LogOutButton.module.css";
 
 const LogOutButton = () => {
   const navigate = useNavigate();
@@ -18,7 +20,9 @@ const LogOutButton = () => {
 
       if (!response.ok) {
         const result = await response.json().catch(() => null);
-        throw new Error(result?.message ?? "Не удалось выйти. Попробуйте ещё раз.");
+        throw new Error(
+          result?.message ?? "Не удалось выйти. Попробуйте ещё раз.",
+        );
       }
 
       sessionStorage.removeItem("access_token");
@@ -37,8 +41,14 @@ const LogOutButton = () => {
 
   return (
     <>
-      <button type="button" onClick={handleLogOut} disabled={isLoggingOut}>
-        {isLoggingOut ? "Выход..." : "Выйти"}
+      <button
+        type="button"
+        onClick={handleLogOut}
+        disabled={isLoggingOut}
+        className={styles.button}
+      >
+        {/* {isLoggingOut ? "Выход..." : "Выйти"}s */}
+        <IoExitOutline className={styles.icon} size={30} />
       </button>
       {errorMessage && <p role="alert">{errorMessage}</p>}
     </>
